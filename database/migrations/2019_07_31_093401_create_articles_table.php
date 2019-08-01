@@ -17,7 +17,10 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->mediumText('body');
+            $table->string('thumbnail');
             $table->string('city');
+            $table->string('address');
+            $table->string('for')->default('rent');
             $table->decimal('price', 10, 2);
             $table->string('type');
             $table->boolean('available')->default(true);
