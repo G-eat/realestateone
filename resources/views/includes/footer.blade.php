@@ -3,31 +3,16 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="mb-5">
-                        <h3 class="footer-heading mb-4">About Homeland</h3>
+                        <h3 class="footer-heading mb-4">About RealEstateOne</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <div class="row mb-5">
-                        <div class="col-md-12">
-                            <h3 class="footer-heading mb-4">Navigations</h3>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Buy</a></li>
-                                <li><a href="#">Rent</a></li>
-                                <li><a href="#">Properties</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Terms</a></li>
-                            </ul>
-                        </div>
+                    <h3 class="footer-heading mb-4">Navigations</h3>
+                    <div>
+                        <a href="{{ route('all_articles') }}" class="pl-0 pr-3">Home</a>
+                        <a href="#" class="pl-3 pr-3">About</a>
+                        <a href="#" class="pl-3 pr-3">Contact</a>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-5 mb-lg-0">
@@ -44,7 +29,7 @@
                 <div class="col-md-12">
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>

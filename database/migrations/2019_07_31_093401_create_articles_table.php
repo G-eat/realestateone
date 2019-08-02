@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
             $table->string('address');
             $table->string('for')->default('rent');
             $table->decimal('price', 10, 2);
+            $table->integer('views');
             $table->string('type');
             $table->boolean('available')->default(true);
             $table->string('phonenumber');

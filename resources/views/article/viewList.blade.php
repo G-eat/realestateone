@@ -1,6 +1,6 @@
 @extends('../includes.app')
 
-@section('title') RealEstateOne | Home @endsection
+@section('title') RealEstateOne | Home - List @endsection
 
 @section('navbar_background')
     <div class="slide-one-item home-slider owl-carousel">
@@ -30,7 +30,7 @@
     <div class="site-section site-section-sm pb-0">
         <div class="container">
             <div class="row">
-                <form action="{{ route('article_search') }}" class="form-search col-md-12" style="margin-top: -100px;">
+                <form class="form-search col-md-12" style="margin-top: -100px;">
                     <div class="row  align-items-end">
                         <div class="col-md-2">
                             <label for="list-types">Price</label>
@@ -104,13 +104,13 @@
                 <div class="col-md-12">
                     <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
                         <div class="mr-auto">
-                            <a href="{{ route('all_articles') }}" class="icon-view view-module active"><span class="icon-view_module"></span></a>
-                            <a href="{{ route('all_articles_view_list') }}" class="icon-view view-list"><span class="icon-view_list"></span></a>
+                            <a href="{{ route('all_articles') }}" class="icon-view view-module"><span class="icon-view_module"></span></a>
+                            <a href="{{ route('all_articles_view_list') }}" class="icon-view view-list active"><span class="icon-view_list"></span></a>
                         </div>
                         <div class="ml-auto d-flex align-items-center">
                             <div>
-                                <a href="{{ route('all_articles') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
-                                <a href="{{ url('/card/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
+                                <a href="{{ url('/list') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
+                                <a href="{{ url('/list/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
                             </div>
                         </div>
                     </div>
@@ -121,15 +121,13 @@
 @endsection
 
 @section('content')
-
     <div class="site-section site-section-sm bg-light">
         <div class="container">
-
-            <div class="row mb-5">
-                @foreach ($articles as $article)
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="property-entry h-100">
-                            <a href="{{ route('article_show',['id' => $article->id]) }}" class="property-thumbnail">
+            @foreach ($articles as $article)
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="property-entry horizontal d-lg-flex">
+                            <a href="{{ route('article_show',['id' => $article->id]) }}" class="property-thumbnail h-100">
                                 <div class="offer-type-wrap">
                                     @if ($article->for == 'sale')
                                         <span class="offer-type bg-danger">Sale</span>
@@ -141,8 +139,9 @@
                             </a>
                             <div class="p-4 property-body">
                                 <h2 class="property-title"><a href="{{ route('article_show',['id' => $article->id]) }}">{{ $article->title }}</a></h2>
-                                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ $article->address }}</span>
-                                <strong class="property-price text-primary mb-3 d-block text-success">${{ $article->price }}</strong>
+                                <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span>{{ $article->address }}</span>
+                                <strong class="property-price text-primary mb-3 d-block text-success">{{ $article->price }}$</strong>
+                                <p>{{ $article->body }}</p>
                                 <ul class="property-specs-wrap mb-3 mb-lg-0">
                                     <li>
                                         <span class="property-specs">Type</span>
@@ -152,8 +151,8 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
 
             <span>Page :</span>{{ $articles->onEachSide(5)->links() }}
 

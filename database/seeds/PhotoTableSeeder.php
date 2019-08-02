@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Article;
+use App\Photo;
 
-class ArticleTableSeeder extends Seeder
+class PhotoTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class ArticleTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Article::class, 50)->create();
+        factory(Photo::class, 100)->create();
     }
 }
