@@ -18,11 +18,15 @@
                     <nav class="site-navigation text-right text-md-right" role="navigation">
                         <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
                         <ul class="site-menu js-clone-nav d-none d-lg-block">
-                            <li class="active">
+                            <li class="{{ (Route::current()->getName() == 'all_articles') ? 'active' : '' }}">
                                 <a href="{{ route('all_articles') }}">Home</a>
                             </li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li class="{{ (Route::current()->getName() == 'aboutus') ? 'active' : '' }}">
+                                <a href="{{ route('aboutus') }}">About</a>
+                            </li>
+                            <li class="{{ (Route::current()->getName() == 'contactus') ? 'active' : '' }}">
+                                <a href="{{ route('contactus') }}">Contact</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>

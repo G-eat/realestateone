@@ -27,97 +27,7 @@
 @endsection
 
 @section('search')
-    <div class="site-section site-section-sm pb-0">
-        <div class="container">
-            <div class="row">
-                <form action="{{ route('article_search') }}" class="form-search col-md-12" style="margin-top: -100px;">
-                    <div class="row  align-items-end">
-                        <div class="col-md-2">
-                            <label for="list-types">Price</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">From</span>
-                                </div>
-                                <input type="text" name='price_from' class="form-control" placeholder="e.g. 200">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">To</span>
-                                </div>
-                                <input type="text" name='price_to' class="form-control" placeholder="e.g. 300">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="offer-types">Offer Type</label>
-                            <div class="select-wrap">
-                                <span class="icon icon-arrow_drop_down"></span>
-                                <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                                    <option value="all">All</option>
-                                    <option value="sale">For Sale</option>
-                                    <option value="rent">For Rent</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="select-city">City</label>
-                            <div class="select-wrap">
-                                <select name="city" class="form-control d-block rounded-0">
-                                    <option value="all">All</option>
-                                    <option value="gjakove">Gjakove</option>
-                                    <option value="prishtine">Prishtine</option>
-                                    <option value="mitrovice">Mitrovice</option>
-                                    <option value="peje">Peje</option>
-                                    <option value="prizren">Prizren</option>
-                                    <option value="gjilan">Gjilan</option>
-                                    <option value="ferizaj">Ferizaj</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="select-city">Type</label>
-                            <div class="select-wrap">
-                                <select name="type" class="form-control d-block rounded-0">
-                                    <option value="all">All</option>
-                                    <option value="1+1">1 + 1</option>
-                                    <option value="2+1">2 + 1</option>
-                                    <option value="3+1">3 + 1</option>
-                                    <option value="3+2">3 + 2</option>
-                                    <option value="4+1">4 + 1</option>
-                                    <option value="4+2">4 + 2</option>
-                                    <option value="5+1">5 + 1</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="Search">
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
-                        <div class="mr-auto">
-                            <a href="{{ route('all_articles') }}" class="icon-view view-module active"><span class="icon-view_module"></span></a>
-                            <a href="{{ route('all_articles_view_list') }}" class="icon-view view-list"><span class="icon-view_list"></span></a>
-                        </div>
-                        <div class="ml-auto d-flex align-items-center">
-                            <div>
-                                <a href="{{ route('all_articles') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
-                                <a href="{{ url('/card/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('../includes/search')
 @endsection
 
 @section('content')
@@ -155,22 +65,44 @@
                 @endforeach
             </div>
 
-            <span>Page :</span>{{ $articles->onEachSide(5)->links() }}
+            @if ($articles->lastPage() > 1)
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="site-pagination">
+                            @if($articles->currentPage() >= 5 )
+                                <a href="{{ $articles->url(1) }}">{{ 1 }}</a>
+                                <span>...</span>
+                            @elseif ($articles->currentPage() >= 4 )
+                                <a href="{{ $articles->url(1) }}">{{ 1 }}</a>
+                            @endif
 
-            <!-- {{ $articles->appends(['sort' => 'created_at'])->links() }} -->
-            <!-- <div class="row">
-                <div class="col-md-12 text-center">
-                    <div class="site-pagination">
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <span>...</span>
-                        <a href="#">10</a>
+                            @for ($i = 1; $i <= $articles->lastPage(); $i++)
+                                <?php
+                                $half_total_links = floor(7 / 2);
+                                $from = $articles->currentPage() - $half_total_links;
+                                $to = $articles->currentPage() + $half_total_links;
+                                if ($articles->currentPage() < $half_total_links) {
+                                    $to += $half_total_links - $articles->currentPage();
+                                }
+                                if ($articles->lastPage() - $articles->currentPage() < $half_total_links) {
+                                    $from -= $half_total_links - ($articles->lastPage() - $articles->currentPage()) - 1;
+                                }
+                                ?>
+                                @if ($from < $i && $i < $to)
+                                    <a class="{{ ($articles->currentPage() == $i) ? 'active':'' }}" href="{{ $articles->url($i) }}">{{ $i }}</a>
+                                @endif
+                            @endfor
+
+                            @if($articles->currentPage() <= $articles->lastPage()-4 )
+                                <span>...</span>
+                                <a href="{{ $articles->url($articles->lastPage()) }}">{{ $articles->lastPage() }}</a>
+                            @elseif ($articles->currentPage() <= $articles->lastPage()-3 )
+                                <a href="{{ $articles->url($articles->lastPage()) }}">{{ $articles->lastPage() }}</a>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div> -->
+            @endif
         </div>
     </div>
 @endsection

@@ -20,6 +20,9 @@ Route::get('/admin', function () {
     return view('admin.welcome');
 });
 
+Route::get('/about-us', 'AboutUsController@index')->name('aboutus');
+Route::get('/contact-us', 'ContactUsController@index')->name('contactus');
+
 Route::prefix('admin')->group(function () {
     Auth::routes(['register' => false]);
     Route::get('home', 'HomeController@index')->name('home');
