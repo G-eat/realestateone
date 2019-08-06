@@ -24,25 +24,45 @@
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="fullname">Full Name</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Full Name">
+                                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name" value="{{ old('name') }}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="font-weight-bold" for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Email Address">
+                                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email Address" value="{{ old('email') }}">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="font-weight-bold" for="email">Subject</label>
-                                <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter Subject">
+                                <input type="text" id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" placeholder="Enter Subject" value="{{ old('subject') }}">
+                                @error('subject')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="font-weight-bold" for="message">Message</label>
-                                <textarea name="message" id="message" dirname="message" cols="30" rows="5" class="form-control" placeholder="Say hello to us"></textarea>
+                                <textarea name="content" id="content"  cols="30" rows="5" class="form-control @error('content') is-invalid @enderror" placeholder="Say hello to us">{{ old('content') }}</textarea>
+                                @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row form-group">
