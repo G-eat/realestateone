@@ -28,4 +28,17 @@ class SearchRequest extends FormRequest
             'price_to'   => 'nullable|integer|required_with:price_from'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+//    public function messages()
+//    {
+//        return [
+//            'price_from.required_with:price_to' => 'The From field is required when To is present.',
+//            'price_to.required_with:price_from' => 'The To field is required when From is present.',
+//        ];
+//    }
 }

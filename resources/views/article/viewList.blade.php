@@ -2,6 +2,15 @@
 
 @section('title') RealEstateOne | Home - List @endsection
 
+@if($errors->any())
+    <div class="alert alert-success alert-dismissible mb-0">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @foreach($errors->all() as $error)
+            <span>{{ $error }}</span>
+        @endforeach
+    </div>
+@endif
+
 @section('navbar_background')
     <div class="slide-one-item home-slider owl-carousel">
         @foreach ($randomarticles as $article)

@@ -2,13 +2,13 @@
     <html lang="en">
         <head>
             <title>@yield('title')</title>
-            @include('../includes/header')
+            @include('includes.header')
         </head>
         <body>
 
             <div class="site-loader"></div>
 
-            @include('../includes/navbar')
+            @include('includes.navbar')
 
             @yield('navbar_background')
 
@@ -16,9 +16,9 @@
 
             @yield('content')
 
-            @include('../includes/footer')
+            @include('includes.footer')
 
-            @include('../includes/javascript')
+            @include('includes.javascript')
 
         </body>
     </html>

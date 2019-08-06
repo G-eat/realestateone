@@ -70,14 +70,6 @@
                 </div>
             </form>
         </div>
-        @if($errors->any())
-            <div class="alert alert-danger mt-2">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                @foreach($errors->all() as $error)
-                    <div style="padding: 5px">{{ $error }}</div>
-                @endforeach
-            </div>
-        @endif
 
         @if(Route::current()->getName() != 'article_search')
             <div class="row">

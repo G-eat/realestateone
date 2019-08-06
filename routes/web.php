@@ -22,6 +22,7 @@ Route::get('/admin', function () {
 
 Route::get('/about-us', 'AboutUsController@index')->name('aboutus');
 Route::get('/contact-us', 'ContactUsController@index')->name('contactus');
+Route::post('/contact-us', 'ContactUsController@sendmessage')->name('send.message');
 
 Route::prefix('admin')->group(function () {
     Auth::routes(['register' => false]);

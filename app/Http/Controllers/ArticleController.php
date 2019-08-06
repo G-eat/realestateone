@@ -8,13 +8,18 @@ use App\Http\Requests\SearchRequest;
 
 class ArticleController extends Controller
 {
-    public function index($sortBy = 'latest')
+    public function index(Request $request ,$sortBy = 'latest')
     {
         if ($sortBy == 'most-viewed') {
             $articles = Article::orderBy('views', 'desc')->paginate(9);
         } else {
-            $articles = Article::orderBy('updated_at', 'desc')->paginate(9);
+            $articles = Article::orderBy('created_at', 'desc')->paginate(9);
         }
+
+//        if ($request->get('page') > $articles->lastPage() || is_int($request->get('page')) || ($request->get('page') < 1 && is_int($request->get('page'))))
+//        {
+//            return redirect('/')->with('status', 'Profile updated!');
+//        }
 
         $randomArticles = Article::inRandomOrder()->take(5)->get();
 
@@ -29,7 +34,7 @@ class ArticleController extends Controller
         if ($sortBy == 'most-viewed') {
             $articles = Article::orderBy('views', 'desc')->paginate(9);
         } else {
-            $articles = Article::orderBy('updated_at', 'desc')->paginate(9);
+            $articles = Article::orderBy('created_at', 'desc')->paginate(9);
         }
 
         $randomArticles = Article::inRandomOrder()->take(5)->get();
@@ -42,7 +47,9 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::where('id', $id)->first();
+        $article->increment('views');
+
         $photos = $article->photo;
 
         return view('article.show')
