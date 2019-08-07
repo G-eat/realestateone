@@ -23,11 +23,9 @@
                 </div>
                 <div class="col-md-5 ml-auto"  data-aos="fade-up" data-aos-delay="200">
                     <div class="site-section-title">
-                        <h2>Our Company</h2>
+                        <h2>{{ $about_us->title }}</h2>
                     </div>
-                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus in cum odio./p>
-                    <p>Illum repudiandae ratione facere explicabo. Consequatur dolor optio iusto, quos autem voluptate ea? Sunt laudantium fugiat, mollitia voluptate? Modi blanditiis veniam nesciunt architecto odit voluptatum tempore impedit magnam itaque natus!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consectetur odio quia voluptate. Alias aspernatur cumque distinctio, facere illo ipsum necessitatibus numquam officia qui repudiandae rerum soluta temporibus totam vitae!</p>
+                    <p class="lead">strlen({{ $about_us->body }}</p>
                 </div>
             </div>
         </div>

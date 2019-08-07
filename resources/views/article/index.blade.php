@@ -2,15 +2,8 @@
 
 @section('title') RealEstateOne | Home @endsection
 
-@if (\Session::has('success'))
-    <div class="alert alert-success alert-dismissible mb-0">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <span class="container">{!! \Session::get('success') !!}</span>
-    </div>
-@endif
-
 @if($errors->any())
-    <div class="alert alert-success alert-dismissible mb-0">
+    <div class="alert alert-danger alert-dismissible mb-0">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         @foreach($errors->all() as $error)
             <span>{{ $error }}</span>

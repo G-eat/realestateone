@@ -6,6 +6,19 @@
         </head>
         <body>
 
+            @auth
+                <nav class="navbar" id="navbar-fixed" style="background: #3c8dbc;">
+                    <div class="container">
+                        <a href="{{ route('home') }}" class="text-white">
+                            AdminPannel
+                        </a>
+                        <a href="{{ route('logout') }}" class="text-white">
+                            {{ __('Logout') }}
+                        </a>
+                    </div>
+                </nav>
+            @endauth
+
             <div class="site-loader"></div>
 
             @include('includes.navbar')
@@ -20,5 +33,16 @@
 
             @include('includes.javascript')
 
+            <script>
+                var elementPosition = $('#navbar-fixed').offset();
+
+                $(window).scroll(function(){
+                    if($(window).scrollTop() > elementPosition.top){
+                        $('#navbar-fixed').addClass('fixed-top');
+                    } else {
+                        $('#navbar-fixed').removeClass('fixed-top');
+                    }
+                });
+            </script>
         </body>
     </html>

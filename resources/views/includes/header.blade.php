@@ -19,3 +19,5 @@
 <link rel="stylesheet" href="../css/aos.css">
 
 <link rel="stylesheet" href="../css/style.css">
+
+<link href="../css/toastr.min.css" rel="stylesheet"/>

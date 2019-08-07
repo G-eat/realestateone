@@ -8,7 +8,7 @@
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
                     <p class="mb-5"><strong class="h2 text-success font-weight-bold">{{ $article->views }} views</strong></p>
-                    <h1 class="mb-2">{{ $article->address }}</h1>
+                    <h1 class="mb-2">{{ $article->city }}</h1>
                     <p class="mb-5"><strong class="h2 text-success font-weight-bold">{{ $article->price }}$</strong></p>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-md-6 col-lg-3 text-center border-bottom border-top py-3">
                                 <span class="d-inline-block text-black mb-0 caption-text">City</span>
-                                <strong class="d-block">{{ $article->city }}</strong>
+                                <strong class="d-block">{{ ucfirst($article->city) }}</strong>
                             </div>
                             <div class="col-md-6 col-lg-3 text-center border-bottom border-top py-3">
                                 <span class="d-inline-block text-black mb-0 caption-text">Adress</span>

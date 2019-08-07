@@ -59,7 +59,6 @@ class ArticleController extends Controller
 
     public function search(SearchRequest $request)
     {
-
         $price_from    = $request->input('price_from');
         $price_to      = $request->input('price_to');
         $for           = $request->input('offer-types');
@@ -83,8 +82,12 @@ class ArticleController extends Controller
         $sortBy = 'latest';
         $randomArticles = Article::inRandomOrder()->take(5)->get();
 
+        $notification = [
+            'message' => 'We appreciate you contacting us. One of our colleagues will get back to you shortly. Have a great day!',
+            'alert-type' => 'success'
+        ];
 
-        return view('article.search')
+        return redirect('/') ->with($notification)
                                             ->with('price_from', $price_from)
                                             ->with('price_to', $price_to)
                                             ->with('for', $for)

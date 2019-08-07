@@ -25,8 +25,13 @@ class ContactUsController extends Controller
         $contact_us->message = $request->input('content');
         $contact_us->save();
 
+        $notification = [
+            'message' => 'We appreciate you contacting us. One of our colleagues will get back to you shortly. Have a great day!',
+            'alert-type' => 'success'
+        ];
+
         event(new SendEmailOfContactUsEvent($contact_us));
 
-        return redirect('/')->with('success', 'We appreciate you contacting us. One of our colleagues will get back to you shortly. Have a great day!');
+        return redirect('/')->with($notification);
     }
 }
