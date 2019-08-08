@@ -25,7 +25,7 @@
                     <div class="site-section-title">
                         <h2>{{ $about_us->title }}</h2>
                     </div>
-                    <p class="lead">strlen({{ $about_us->body }}</p>
+                    <p class="lead">{{ $about_us->body }}</p>
                 </div>
             </div>
         </div>

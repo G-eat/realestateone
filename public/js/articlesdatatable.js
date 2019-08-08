@@ -1,4 +1,3 @@
-
 $(function() {
     $('#articles-table').DataTable({
         processing: true,
@@ -19,13 +18,30 @@ $(function() {
 $("#articles-table").on("click", ".deleteButton", function () {
     var is_confirmed = confirm(`Are you sure you want to delete this article?`);
     if (is_confirmed === true) {
-        alert($(this).data("id"));
-    }
-});
+        var id = $(this).data("id");
 
-$(document).ready(function(){
-    $('.button-left').click(function(){
-        $('.sidebar').toggleClass('fliph');
-    });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax(
+            {
+                url: "article/delete/"+id,
+                type: 'delete',
+                data: {
+                    "id": id
+                },
+                success: function (response)
+                {
+                    $("#articles-table").DataTable().ajax.reload(null, false );
+                    toastr.success('You deleted article.', 'Success Alert', {timeOut: 5000});
+                },
+                error: function(xhr) {
+                    //console.log(xhr);
+                    toastr.error('Something goes wrong, please try again after some minutes.', 'Inconceivable!', {timeOut: 5000});
+                }
+            });
+    }
 });
 

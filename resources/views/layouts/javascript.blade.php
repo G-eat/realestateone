@@ -2,7 +2,7 @@
 
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
-<script src="../js/articlesdatatable.js"></script>
+@yield('data')
 
 <script>
     @if(Session::has('message'))
@@ -25,4 +25,11 @@
                 break;
         }
     @endif
+
+
+    $(document).ready(function(){
+        $('.button-left').click(function(){
+            $('.sidebar').toggleClass('fliph');
+        });
+    });
 </script>

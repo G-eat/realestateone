@@ -29,3 +29,8 @@
     </div>
 @endsection
 
+@section('data')
+    <script src="../js/articlesdatatable.js"></script>
+@endsection
+
+

@@ -98,8 +98,15 @@ class ArticleController extends Controller
                                             ->with('randomarticles', $randomArticles);
     }
 
-    public function edit ($id) {
+    public function edit ($id)
+    {
         $article = Article::where('id', $id)->first();
         return 123;
+    }
+
+    public function destroy ($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->delete();
     }
 }

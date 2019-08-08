@@ -37,7 +37,7 @@ Route::prefix('admin')->group(function () {
     Route::get('about-us', 'AdminController@aboutus')->name('admin.aboutus');
     Route::get('/data/articles', 'AdminController@articlesdatatable')->name('data.articles');
     Route::get('/data/contactsus', 'AdminController@contactusdatatable')->name('data.contactus');
-
+    Route::delete('/article/delete/{id}', 'ArticleController@destroy')->name('destroy.article');
 });
 
 Route::post('/update/about-us', 'AboutUsController@update')->name('update.aboutus');
