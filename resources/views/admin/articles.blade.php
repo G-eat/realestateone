@@ -2,33 +2,30 @@
 
 @section('content')
     <div>
-        <table class="table table-bordered" id="users-table">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-            </tr>
-            </thead>
-        </table>
+        <div class="row justify-content-center">
+            <div class="col-md-11">
+                <div class="card">
+                    <div class="card-header">Articles</div>
+                    <div class="container">
+                        <div class="card-body">
+                            <table class="table table-bordered" id="articles-table">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>City</th>
+                                        <th>Address</th>
+                                        <th>Type</th>
+                                        <th>Phone Number</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
-<script>
-    $(function() {
-        $('#users-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{!! route('admin.data') !!}',
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'name', name: 'name' },
-                { data: 'email', name: 'email' },
-                { data: 'created_at', name: 'created_at' },
-                { data: 'updated_at', name: 'updated_at' }
-            ]
-        });
-    });
-</script>

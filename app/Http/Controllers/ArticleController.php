@@ -97,4 +97,9 @@ class ArticleController extends Controller
                                             ->with('articles', $articles)
                                             ->with('randomarticles', $randomArticles);
     }
+
+    public function edit ($id) {
+        $article = Article::where('id', $id)->first();
+        return 123;
+    }
 }

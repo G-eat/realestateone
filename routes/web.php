@@ -14,6 +14,7 @@ Route::get('/', 'ArticleController@index');
 Route::get('/card/{sortBy?}', 'ArticleController@index')->where(['sortBy' => 'most-viewed'])->name('all_articles');
 Route::get('/list/{sortBy?}', 'ArticleController@viewList')->where(['sortBy' => 'most-viewed'])->name('all_articles_view_list');
 Route::get('/show/{id}', 'ArticleController@show')->name('article_show');
+Route::get('/edit/{id}', 'ArticleController@edit')->name('article_edit');
 Route::get('/search', 'ArticleController@search')->name('article_search');
 
 Route::get('/admin', function () {
@@ -34,11 +35,9 @@ Route::prefix('admin')->group(function () {
     Route::get('articles', 'AdminController@articles')->name('admin.articles');
     Route::get('contact-us', 'AdminController@contactus')->name('admin.contactus');
     Route::get('about-us', 'AdminController@aboutus')->name('admin.aboutus');
+    Route::get('/data/articles', 'AdminController@articlesdatatable')->name('data.articles');
+    Route::get('/data/contactsus', 'AdminController@contactusdatatable')->name('data.contactus');
+
 });
 
 Route::post('/update/about-us', 'AboutUsController@update')->name('update.aboutus');
-
-//Route::controller('realestateone.example.com', 'AdminController', [
-//    'anyData'  => 'admin.data',
-//    'getIndex' => 'admin',
-//]);
