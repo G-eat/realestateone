@@ -18,7 +18,7 @@
                             </span>
                             @enderror
                             <label class="font-weight-bold mt-3" for="body">Body :</label>
-                            <textarea name="body" id="body" rows="5" class="form-control @error('body') is-invalid @enderror" placeholder="Body ...">{{ (old('body')) ? old('body') : $aboutus->body }}</textarea>
+                            <textarea name="body" id="body" rows="9" class="form-control @error('body') is-invalid @enderror" placeholder="Body ...">{{ (old('body')) ? old('body') : $aboutus->body }}</textarea>
                             @error('body')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

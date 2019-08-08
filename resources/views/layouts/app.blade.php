@@ -11,16 +11,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <link href="../css/adminstyle.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700">
-
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
     <link href="../css/toastr.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 
 </head>
 <body>
@@ -30,13 +28,10 @@
    =======================-->
     <header class="header">
         <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             @auth
                 <a class="button-left pt-2 pb-2" style="color: white;text-decoration: none; cursor: pointer"><span class="fa fa-fw fa-bars mr-2"></span>AdminPannel</a>
             @else
-                <a class="button-left pt-2 pb-2" style="color: white;text-decoration: none;">AdminPannel</a>
+                <a style="color: white;text-decoration: none;">AdminPannel</a>
             @endauth
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -65,8 +60,8 @@
                             <img src="http://via.placeholder.com/160x160" class="rounded-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>bootstrap develop</p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            <p>{{ Auth::user()->name }}</p>
+                            <a>{{ Auth::user()->email }}</a>
                         </div>
                     </div>
                     <ul class="list-sidebar bg-defoult">

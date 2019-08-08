@@ -37,3 +37,8 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::post('/update/about-us', 'AboutUsController@update')->name('update.aboutus');
+
+//Route::controller('realestateone.example.com', 'AdminController', [
+//    'anyData'  => 'admin.data',
+//    'getIndex' => 'admin',
+//]);

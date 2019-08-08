@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\AboutUs;
+use App\Article;
 use App\ContactUs;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class AdminController extends Controller
 {
@@ -23,5 +25,10 @@ class AdminController extends Controller
     {
         $aboutus = AboutUs::first();
         return view('admin.aboutus')->with('aboutus',$aboutus);
+    }
+
+    public function anyData()
+    {
+        return Datatables::of(Article::query())->make(true);
     }
 }
