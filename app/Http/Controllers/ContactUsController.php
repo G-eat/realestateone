@@ -34,4 +34,17 @@ class ContactUsController extends Controller
 
         return redirect('/')->with($notification);
     }
+
+    public function destroy ($id)
+    {
+        $contact = ContactUs::findOrFail($id);
+        $contact->delete();
+    }
+
+    public function show ($id)
+    {
+        $contact = ContactUs::findorFail($id);
+
+        return view('admin.contact_show')->with('contact',$contact);
+    }
 }

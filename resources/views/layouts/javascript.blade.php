@@ -2,7 +2,7 @@
 
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
-@yield('data')
+@yield('only_one_page_js')
 
 <script>
     @if(Session::has('message'))

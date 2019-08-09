@@ -7,6 +7,7 @@
                 <div class="card">
                     <div class="card-header">Articles</div>
                     <div class="container">
+                        <a class="btn btn-primary mt-2 mb-2" style="float: right" href="{{ route('create.article') }}">Create</a>
                         <div class="card-body">
                             <table class="table table-bordered" id="articles-table">
                                 <thead>
@@ -29,7 +30,7 @@
     </div>
 @endsection
 
-@section('data')
+@section('only_one_page_js')
     <script src="../js/articlesdatatable.js"></script>
 @endsection
 

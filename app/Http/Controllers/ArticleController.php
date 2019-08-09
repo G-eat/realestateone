@@ -101,12 +101,16 @@ class ArticleController extends Controller
     public function edit ($id)
     {
         $article = Article::where('id', $id)->first();
-        return 123;
+        return view('admin.edit_article')->with('article',$article);
     }
 
     public function destroy ($id)
     {
         $article = Article::findOrFail($id);
         $article->delete();
+    }
+
+    public function create () {
+        return view('admin.create_article');
     }
 }

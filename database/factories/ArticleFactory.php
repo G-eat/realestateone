@@ -20,11 +20,10 @@ $factory->define(Article::class, function (Faker $faker) {
     return [
         'title'         => $faker->sentence,
         'body'          => $faker->paragraph,
-        'thumbnail'     => $faker->imageUrl($width=800, $height=500, 'cats'),
         'city'          => $faker->randomElement(['gjakove', 'prishtine','mitrovice','peje','prizren','gjilan','ferizaj']),
         'address'       => $faker->address,
         'for'           => $faker->randomElement(['rent', 'sale']),
-        'price'         => $faker->randomFloat($nbMaxDecimals = null, $min = 50, $max = 100000),
+        'price'         => $faker->numberBetween($min = 50, $max = 1000000),
         'views'         => $faker->numberBetween($min = 0, $max = 2000),
         'type'          => $faker->numberBetween(1, 5) . '+' . $faker->numberBetween(1, 2),
         'available'     => $faker->numberBetween(0, 1),

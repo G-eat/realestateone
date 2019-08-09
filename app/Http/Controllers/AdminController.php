@@ -36,15 +36,22 @@ class AdminController extends Controller
                 return
                 '<a href="' . route('article_show', $article->id) . '"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
                  <a href="' . route('article_edit', $article->id) . '"><i class="fa fa-pencil text-primary" aria-hidden="true"></i></a>
-                 <a role="button" class="deleteButton" data-id="'. $article->id .'" onsubmit="return confirm(`Are you sure you want to delete this article?`);"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
+                 <a role="button" class="deleteButton" data-id="'. $article->id .'"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
             })
             ->make();
     }
 
     public function contactusdatatable()
     {
-        $contacts = ContactUs::select(['id','name','email','subject','created_at'])->orderBy('created_at','desc');
+        $contacts = ContactUs::select(['id','name','email','subject','created_at'])
+            ->orderBy('created_at','desc');
 
-        return Datatables::of($contacts)->make();
+        return Datatables::of($contacts)
+            ->editColumn('action', function($contact) {
+                return
+                '<a href="' . route('contact_show', $contact->id) . '"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
+                 <a role="button" class="deleteButton" data-id="'. $contact->id .'"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
+            })
+            ->make();
     }
 }

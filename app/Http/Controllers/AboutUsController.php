@@ -24,22 +24,15 @@ class AboutUsController extends Controller
 
         if($about_us->title === $request->input('title') && $about_us->body === $request->input('body'))
         {
-            $notification = [
-                'message' => 'You didnt change anything.',
-                'alert-type' => 'warning'
-            ];
+            return "Error" ;
         } else {
             $about_us->title = $request->input('title');
             $about_us->body = $request->input('body');
             $about_us->save();
 
-            $notification = [
-                'message' => 'AboutUs is Updated.',
-                'alert-type' => 'success'
-            ];
+            return "Success" ;
         }
 
-        return redirect('/admin/about-us')->with($notification);
     }
 
 }
