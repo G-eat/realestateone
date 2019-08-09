@@ -1,15 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
+    <ul>
+
+        @foreach ($errors->all() as $error)
+
+            <li>{{ $error }}</li>
+
+        @endforeach
+
+    </ul>
     <div>
         <div class="row justify-content-center">
-            <div class="col-12 col-md-12 col-lg-6 pb-5">
-                <form action="" method="post">
+            <div class="col-11 pb-5">
+                <form action="{{ route(('article.store')) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card border-primary rounded-0">
                         <div class="card-header p-0">
                             <div class="bg-info text-white text-center py-2">
-                                <h3>Create Articles</h3>
+                                <h3>Create Article</h3>
                             </div>
                         </div>
                         <div class="card-body p-3">
@@ -20,7 +29,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">Title</div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Title" required>
+                                    <input type="text" name="title" class="form-control" placeholder="Title" required>
                                 </div>
                             </div>
 
@@ -29,7 +38,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">Body</div>
                                     </div>
-                                    <textarea rows="10" class="form-control" placeholder="Body" required></textarea>
+                                    <textarea rows="10" name="body" class="form-control" placeholder="Body" required></textarea>
                                 </div>
                             </div>
 
@@ -38,7 +47,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">City</div>
                                     </div>
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select name='city' class="form-control" id="exampleFormControlSelect1">
                                         <option value="Gjakove">Gjakove</option>
                                         <option value="Prishtine">Prishtine</option>
                                         <option value="Mitrovice">Mitrovice</option>
@@ -55,7 +64,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">Address</div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="address" required>
+                                    <input type="text" name="address" class="form-control" placeholder="address" required>
                                 </div>
                             </div>
 
@@ -64,7 +73,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">For</div>
                                     </div>
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select name="for" class="form-control" id="exampleFormControlSelect1">
                                         <option value="both">Both</option>
                                         <option value="sale">Sale</option>
                                         <option value="rent">Rent</option>
@@ -77,7 +86,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">Price</div>
                                     </div>
-                                    <input type="number" class="form-control" placeholder="e.g. 200" step="50" required>
+                                    <input name="price" type="number" class="form-control" placeholder="e.g. 200"  required>
                                     <div class="input-group-append">
                                         <span class="input-group-text">$</span>
                                     </div>
@@ -89,7 +98,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">Type</div>
                                     </div>
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <select name="type" class="form-control" id="exampleFormControlSelect1">
                                         <option value="1+1">1 + 1</option>
                                         <option value="2+1">2 + 1</option>
                                         <option value="3+1">3 + 1</option>
@@ -104,15 +113,27 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">Telephone</div>
+                                        <div class="input-group-text text-primary font-weight-bold">Available</div>
                                     </div>
-                                    <input type="tel" class="form-control" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                                    <select name="available" class="form-control" id="exampleFormControlSelect1">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="input-group mb-2">
-                                    <input type="file" class="form-control" name="filefield[]" multiple="multiple">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text text-primary font-weight-bold">Telephone</div>
+                                    </div>
+                                    <input name="phone_number" type="tel" class="form-control" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group mb-2">
+                                    <input type="file" class="form-control" name="filenames[]" multiple="multiple">
                                 </div>
                             </div>
 

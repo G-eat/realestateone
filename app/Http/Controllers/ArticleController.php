@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateArticleRequest;
+use App\Photo;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Http\Requests\SearchRequest;
@@ -112,5 +114,42 @@ class ArticleController extends Controller
 
     public function create () {
         return view('admin.create_article');
+    }
+
+    public function store (CreateArticleRequest $request)
+    {
+        foreach($request->file('filenames') as $file)
+        {
+            $name=$file->getClientOriginalName();
+            $file->move(public_path().'/photos/', $name);
+            $data[] = $name;
+        }
+
+        $article = Article::create([
+            'title'         => $request->input('title'),
+            'body'          => $request->input('body'),
+            'city'          => $request->input('city'),
+            'address'       => $request->input('address'),
+            'for'           => $request->input('for'),
+            'price'         => $request->input('price'),
+            'type'          => $request->input('type'),
+            'available'     => $request->input('available'),
+            'phonenumber'   => $request->input('phone_number'),
+        ]);
+
+        $first_photo = $data[0];
+
+
+        foreach ($data as $photo_name) {
+            $photo = new Photo();
+            $photo->article_id = $article->id;
+            $photo->path = $photo_name;
+            if ($first_photo === $photo_name) {
+                $photo->is_thumbnail = 1;
+            } else {
+                $photo->is_thumbnail = 0;
+            }
+            $photo->save();
+        }
     }
 }

@@ -44,6 +44,7 @@ Route::group([
         Route::delete('/contact/delete/{id}', 'ContactUsController@destroy')->name('destroy.contact');
         Route::get('/contact/{id}', 'ContactUsController@show')->name('contact_show');
         Route::get('/create-article', 'ArticleController@create')->name('create.article');
+        Route::post('/create-article', 'ArticleController@store')->name('article.store');
     });
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
