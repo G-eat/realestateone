@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title') RealEstateOne | Admin-Home @endsection
+
 @section('content')
     <div>
         <div class="row justify-content-center">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 use App\Photo;
 use Illuminate\Http\Request;
 use App\Article;
@@ -13,9 +14,13 @@ class ArticleController extends Controller
     public function index(Request $request ,$sortBy = 'latest')
     {
         if ($sortBy == 'most-viewed') {
-            $articles = Article::orderBy('views', 'desc')->paginate(9);
+            $articles = Article::with(['photo' => function($query) {
+                $query->where('is_thumbnail', '=', 1);
+            }])->orderBy('views', 'desc')->paginate(9);
         } else {
-            $articles = Article::orderBy('created_at', 'desc')->paginate(9);
+            $articles = Article::with(['photo' => function($query) {
+                $query->where('is_thumbnail', '=', 1);
+            }])->orderBy('created_at', 'desc')->paginate(9);
         }
 
 //        if ($request->get('page') > $articles->lastPage() || is_int($request->get('page')) || ($request->get('page') < 1 && is_int($request->get('page'))))
@@ -23,7 +28,9 @@ class ArticleController extends Controller
 //            return redirect('/')->with('status', 'Profile updated!');
 //        }
 
-        $randomArticles = Article::inRandomOrder()->take(5)->get();
+        $randomArticles = Article::with(['photo' => function($query) {
+            $query->where('is_thumbnail', '=', 1);
+        }])->inRandomOrder()->take(5)->get();
 
         return view('article.index')
                                     ->with('sortby', $sortBy)
@@ -34,12 +41,18 @@ class ArticleController extends Controller
     public function viewList($sortBy = 'latest')
     {
         if ($sortBy == 'most-viewed') {
-            $articles = Article::orderBy('views', 'desc')->paginate(9);
+            $articles = Article::with(['photo' => function($query) {
+                $query->where('is_thumbnail', '=', 1);
+            }])->orderBy('views', 'desc')->paginate(9);
         } else {
-            $articles = Article::orderBy('created_at', 'desc')->paginate(9);
+            $articles = Article::with(['photo' => function($query) {
+                $query->where('is_thumbnail', '=', 1);
+            }])->orderBy('created_at', 'desc')->paginate(9);
         }
 
-        $randomArticles = Article::inRandomOrder()->take(5)->get();
+        $randomArticles = Article::with(['photo' => function($query) {
+            $query->where('is_thumbnail', '=', 1);
+        }])->inRandomOrder()->take(5)->get();
 
         return view('article.viewList')
                                         ->with('sortby', $sortBy)
@@ -49,7 +62,7 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        $article = Article::where('id', $id)->first();
+        $article = Article::findorFail($id);
         $article->increment('views');
 
         $photos = $article->photo;
@@ -67,30 +80,27 @@ class ArticleController extends Controller
         $city          = $request->input('city');
         $type          = $request->input('type');
 
-        $articles = Article::when($price_from, function($query) use ($price_to, $price_from) {
+        $articles = Article::with(['photo' => function($query) {
+                $query->where('is_thumbnail', '=', 1);
+            }])->when($price_from, function($query) use ($price_to, $price_from) {
             $query->where('price', '>=', $price_from)->where('price', '<=', $price_to);
-        })
-        ->when($for, function($query) use($for) {
-            $query->where('for', $for);
-        })
-        ->when($city, function($query) use($city) {
-            $query->where('city', $city);
-        })
-        ->when($type, function ($query) use ($type){
-            $query->where('type',$type);
-        })
-        ->paginate(9);
+            })
+            ->when($for, function($query) use($for) {
+                $query->where('for', $for);
+            })
+            ->when($city, function($query) use($city) {
+                $query->where('city', $city);
+            })
+            ->when($type, function ($query) use ($type){
+                $query->where('type',$type);
+            })
+            ->paginate(9);
 
         $sortBy = 'latest';
         $randomArticles = Article::inRandomOrder()->take(5)->get();
 
-        $notification = [
-            'message' => 'We appreciate you contacting us. One of our colleagues will get back to you shortly. Have a great day!',
-            'alert-type' => 'success'
-        ];
 
-        return redirect('/') ->with($notification)
-                                            ->with('price_from', $price_from)
+        return view('article.search') ->with('price_from', $price_from)
                                             ->with('price_to', $price_to)
                                             ->with('for', $for)
                                             ->with('city', $city)
@@ -120,7 +130,7 @@ class ArticleController extends Controller
     {
         foreach($request->file('filenames') as $file)
         {
-            $name=$file->getClientOriginalName();
+            $name=time() . '-' . $file->getClientOriginalName();
             $file->move(public_path().'/photos/', $name);
             $data[] = $name;
         }
@@ -151,5 +161,54 @@ class ArticleController extends Controller
             }
             $photo->save();
         }
+
+        $notification = [
+            'message' => 'You created new article!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect('/admin/articles') ->with($notification);
+    }
+
+    public function update(UpdateArticleRequest $request, $id)
+    {
+        Article::where('id', $id)
+                                ->update([
+                                    'title'         => $request->input('title'),
+                                    'body'          => $request->input('body'),
+                                    'city'          => $request->input('city'),
+                                    'address'       => $request->input('address'),
+                                    'for'           => $request->input('for'),
+                                    'price'         => $request->input('price'),
+                                    'type'          => $request->input('type'),
+                                    'available'     => $request->input('available'),
+                                    'phonenumber'   => $request->input('phone_number'),
+                                ]);
+
+        $article = Article::find($id);
+
+
+        if($request->file('filenames') > 0)
+        {
+            foreach($request->file('filenames') as $file)
+            {
+                $photo = new Photo();
+                $photo->article_id = $article->id;
+
+                $name=time() . '-' . $file->getClientOriginalName();
+                $file->move(public_path().'/photos/', $name);
+
+                $photo->path = $name;
+                $photo->save();
+            }
+        }
+
+
+        $notification = [
+            'message' => 'You updated an article!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect('/admin/articles') ->with($notification);
     }
 }

@@ -17,7 +17,7 @@ class CreatePhotosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('article_id');
             $table->string('path');
-            $table->boolean('is_thumbnail');
+            $table->boolean('is_thumbnail')->default(0);
             $table->timestamps();
         });
     }

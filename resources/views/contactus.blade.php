@@ -3,15 +3,27 @@
 @section('title') RealEstateOne | AboutUs @endsection
 
 @section('navbar_background')
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ $article->thumbnail }});" data-aos="fade" data-stellar-background-ratio="0.5">
-        <div class="container">
-            <div class="row align-items-center justify-content-center text-center">
-                <div class="col-md-10">
-                    <h1 class="mb-2">Contact Us</h1>
+    @if(!$article->photo[0]->path)
+        <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ '/photos/default.jpg' }});" data-aos="fade" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row align-items-center justify-content-center text-center">
+                    <div class="col-md-10">
+                        <h1 class="mb-2">Contact Us</h1>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ '/photos/'.$article->photo[0]->path }});" data-aos="fade" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row align-items-center justify-content-center text-center">
+                    <div class="col-md-10">
+                        <h1 class="mb-2">Contact Us</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('content')

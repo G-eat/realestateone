@@ -29,8 +29,8 @@
                             <span class="icon icon-arrow_drop_down"></span>
                             <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
                                 <option value="">All</option>
-                                <option value="sale">For Sale</option>
-                                <option value="rent">For Rent</option>
+                                <option value="sale" {{ $for == 'sale' ? 'selected' : '' }}>For Sale</option>
+                                <option value="rent" {{ $for == 'rent' ? 'selected' : '' }}>For Rent</option>
                             </select>
                         </div>
                     </div>
@@ -39,13 +39,13 @@
                         <div class="select-wrap">
                             <select name="city" class="form-control d-block rounded-0">
                                 <option value="">All</option>
-                                <option value="gjakove">Gjakove</option>
-                                <option value="prishtine">Prishtine</option>
-                                <option value="mitrovice">Mitrovice</option>
-                                <option value="peje">Peje</option>
-                                <option value="prizren">Prizren</option>
-                                <option value="gjilan">Gjilan</option>
-                                <option value="ferizaj">Ferizaj</option>
+                                <option value="gjakove" {{ $city == 'gjakove' ? 'selected' : '' }}>Gjakove</option>
+                                <option value="prishtine" {{ $city == 'prishtine' ? 'selected' : '' }}>Prishtine</option>
+                                <option value="mitrovice" {{ $city == 'mitrovice' ? 'selected' : '' }}>Mitrovice</option>
+                                <option value="peje" {{ $city == 'peje' ? 'selected' : '' }}>Peje</option>
+                                <option value="prizren" {{ $city == 'prizren' ? 'selected' : '' }}>Prizren</option>
+                                <option value="gjilan" {{ $city == 'gjilan' ? 'selected' : '' }}>Gjilan</option>
+                                <option value="ferizaj" {{ $city == 'ferizaj' ? 'selected' : '' }}>Ferizaj</option>
                             </select>
                         </div>
                     </div>
@@ -54,13 +54,13 @@
                         <div class="select-wrap">
                             <select name="type" class="form-control d-block rounded-0">
                                 <option value="">All</option>
-                                <option value="1+1">1 + 1</option>
-                                <option value="2+1">2 + 1</option>
-                                <option value="3+1">3 + 1</option>
-                                <option value="3+2">3 + 2</option>
-                                <option value="4+1">4 + 1</option>
-                                <option value="4+2">4 + 2</option>
-                                <option value="5+1">5 + 1</option>
+                                <option value="1+1" {{ $type == '1+1' ? 'selected' : '' }}>1 + 1</option>
+                                <option value="2+1" {{ $type == '2+1' ? 'selected' : '' }}>2 + 1</option>
+                                <option value="3+1" {{ $type == '3+1' ? 'selected' : '' }}>3 + 1</option>
+                                <option value="3+2" {{ $type == '3+2' ? 'selected' : '' }}>3 + 2</option>
+                                <option value="4+1" {{ $type == '4+1' ? 'selected' : '' }}>4 + 1</option>
+                                <option value="4+2" {{ $type == '4+2' ? 'selected' : '' }}>4 + 2</option>
+                                <option value="5+1" {{ $type == '5+1' ? 'selected' : '' }}>5 + 1</option>
                             </select>
                         </div>
                     </div>
@@ -81,8 +81,13 @@
                         </div>
                         <div class="ml-auto d-flex align-items-center">
                             <div>
-                                <a href="{{ route('all_articles') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
-                                <a href="{{ url('/card/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
+                                @if(Route::current()->getName() == 'all_articles')
+                                    <a href="{{ route('all_articles') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
+                                    <a href="{{ url('/card/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
+                                @else
+                                    <a href="{{ route('all_articles_view_list') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
+                                    <a href="{{ url('/list/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
+                                @endif
                             </div>
                         </div>
                     </div>

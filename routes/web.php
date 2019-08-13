@@ -45,6 +45,7 @@ Route::group([
         Route::get('/contact/{id}', 'ContactUsController@show')->name('contact_show');
         Route::get('/create-article', 'ArticleController@create')->name('create.article');
         Route::post('/create-article', 'ArticleController@store')->name('article.store');
+        Route::post('/update-article/{id}', 'ArticleController@update')->name('article.update');
     });
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateArticleRequest extends FormRequest
+class UpdateArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class CreateArticleRequest extends FormRequest
             'body'  => 'required',
             'price' => 'required',
             'phone_number' => 'required',
-            'filenames' => 'required|max:2048',
+            'filenames' => 'max:2048',
             'filenames.*' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];
     }
