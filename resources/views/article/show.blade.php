@@ -3,7 +3,7 @@
 @section('title') RealEstateOne | {{ $article->title }} @endsection
 
 @section('navbar_background')
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ '/photos/'.$article->photo[0]->path }});" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ '/storage/photos/'.$article->photo[0]->path }});" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
@@ -24,7 +24,7 @@
                     <div>
                         <div class="slide-one-item home-slider owl-carousel">
                             @foreach ($photos as $photo)
-                                <div><img src="{{ '/photos/'.$photo->path }}" alt="Image" class="img-fluid"></div>
+                                <div><img src="{{ '/storage/photos/'.$photo->path }}" alt="Image" class="img-fluid"></div>
                             @endforeach
                         </div>
                     </div>
@@ -36,10 +36,14 @@
                             <div class="col-md-6">
                                 <ul class="property-specs-wrap mb-3 mb-lg-0  float-lg-right">
                                     <li>
-                                        @if ($article->for == 'sale')
-                                            <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For Sale</span>
+                                        @if (!$article->available)
+                                            <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">Not available</span>
                                         @else
-                                            <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">For Rent</span>
+                                            @if ($article->for == 'sale')
+                                                <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For Sale</span>
+                                            @else
+                                                <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">For Rent</span>
+                                            @endif
                                         @endif
                                     </li>
                                 </ul>
@@ -72,7 +76,7 @@
                             </div>
                             @foreach ($photos as $photo)
                                 <div class="col-sm-6 col-md-4 col-lg-3">
-                                    <a href="{{ '/photos/'.$photo->path }}" class="image-popup gal-item"><img src="{{ '/photos/'.$photo->path }}" alt="Image" class="img-fluid"></a>
+                                    <a href="{{ '/storage/photos/'.$photo->path }}" class="image-popup gal-item"><img src="{{ '/storage/photos/'.$photo->path }}" alt="Image" class="img-fluid"></a>
                                 </div>
                             @endforeach
                         </div>

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Photo;
+use Faker\Provider\File;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Http\Requests\SearchRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -33,9 +35,9 @@ class ArticleController extends Controller
         }])->inRandomOrder()->take(5)->get();
 
         return view('article.index')
-                                    ->with('sortby', $sortBy)
-                                    ->with('articles', $articles)
-                                    ->with('randomarticles', $randomArticles);
+                                        ->with('sortby', $sortBy)
+                                        ->with('articles', $articles)
+                                        ->with('randomarticles', $randomArticles);
     }
 
     public function viewList($sortBy = 'latest')
@@ -55,9 +57,9 @@ class ArticleController extends Controller
         }])->inRandomOrder()->take(5)->get();
 
         return view('article.viewList')
-                                        ->with('sortby', $sortBy)
-                                        ->with('articles', $articles)
-                                        ->with('randomarticles', $randomArticles);
+                                            ->with('sortby', $sortBy)
+                                            ->with('articles', $articles)
+                                            ->with('randomarticles', $randomArticles);
     }
 
     public function show($id)
@@ -68,8 +70,8 @@ class ArticleController extends Controller
         $photos = $article->photo;
 
         return view('article.show')
-                                    ->with('article', $article)
-                                    ->with('photos', $photos);
+                                        ->with('article', $article)
+                                        ->with('photos', $photos);
     }
 
     public function search(SearchRequest $request)
@@ -96,7 +98,6 @@ class ArticleController extends Controller
             })
             ->paginate(9);
 
-        $sortBy = 'latest';
         $randomArticles = Article::inRandomOrder()->take(5)->get();
 
 
@@ -105,7 +106,6 @@ class ArticleController extends Controller
                                             ->with('for', $for)
                                             ->with('city', $city)
                                             ->with('type', $type)
-                                            ->with('sortby', $sortBy)
                                             ->with('articles', $articles)
                                             ->with('randomarticles', $randomArticles);
     }
@@ -113,12 +113,22 @@ class ArticleController extends Controller
     public function edit ($id)
     {
         $article = Article::where('id', $id)->first();
+
         return view('admin.edit_article')->with('article',$article);
     }
 
     public function destroy ($id)
     {
         $article = Article::findOrFail($id);
+        $photos = $article->photo;
+
+        foreach ($photos as $photo)
+        {
+            Storage::delete('public/photos/'.$photo->path);
+        }
+
+        Photo::where('article_id',$article->id)->delete();
+
         $article->delete();
     }
 
@@ -131,7 +141,7 @@ class ArticleController extends Controller
         foreach($request->file('filenames') as $file)
         {
             $name=time() . '-' . $file->getClientOriginalName();
-            $file->move(public_path().'/photos/', $name);
+            $file->storeAs('public/photos' , $name);
             $data[] = $name;
         }
 

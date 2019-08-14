@@ -38,7 +38,7 @@ $("#articles-table").on("click", ".deleteButton", function () {
                     toastr.success('You deleted article.', 'Success Alert', {timeOut: 5000});
                 },
                 error: function(xhr) {
-                    //console.log(xhr);
+                    // console.log(xhr);
                     toastr.error('Something goes wrong, please try again after some minutes.', 'Inconceivable!', {timeOut: 5000});
                 }
             });

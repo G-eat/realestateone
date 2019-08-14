@@ -27,6 +27,7 @@ class CreateArticleRequest extends FormRequest
             'title' => 'required|max:191',
             'body'  => 'required',
             'price' => 'required',
+            'address' => 'required',
             'phone_number' => 'required',
             'filenames' => 'required|max:2048',
             'filenames.*' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',

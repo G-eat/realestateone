@@ -19,7 +19,7 @@ class CreateArticlesTable extends Migration
             $table->mediumText('body');
             $table->string('city');
             $table->string('address');
-            $table->string('for')->default('all');
+            $table->string('for');
             $table->integer('price');
             $table->integer('views')->default(0);
             $table->string('type');

@@ -69,7 +69,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">Address</div>
                                     </div>
-                                    <input type="text" name="address" class="form-control @error('body') is-invalid @enderror" placeholder="address" value="{{ old('address') ? old('address') : '' }}">
+                                    <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="address" value="{{ old('address') ? old('address') : '' }}">
 
                                     @error('address')
                                         <span class="invalid-feedback" role="alert">

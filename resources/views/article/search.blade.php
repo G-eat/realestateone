@@ -5,7 +5,7 @@
 @section('navbar_background')
     <div class="slide-one-item home-slider owl-carousel">
         @if(count($randomarticles) == 0)
-            <div class="site-blocks-cover overlay" style="background-image: url({{ '/photos/default.jpg' }});" data-aos="fade" data-stellar-background-ratio="0.5">
+            <div class="site-blocks-cover overlay" style="background-image: url({{ '/storage/photos/default.jpg' }});" data-aos="fade" data-stellar-background-ratio="0.5">
                 <div class="container">
                     <div class="row align-items-center justify-content-center text-center">
                         <div class="col-md-10">
@@ -16,7 +16,7 @@
             </div>
         @else
             @foreach ($randomarticles as $article)
-                <div class="site-blocks-cover overlay" style="background-image: url({{ '/photos/'.$article->photo[0]->path }});" data-aos="fade" data-stellar-background-ratio="0.5">
+                <div class="site-blocks-cover overlay" style="background-image: url({{ '/storage/photos/'.$article->photo[0]->path }});" data-aos="fade" data-stellar-background-ratio="0.5">
                     <div class="container">
                         <div class="row align-items-center justify-content-center text-center">
                             <div class="col-md-10">
@@ -111,30 +111,6 @@
                     </div>
                 </form>
             </div>
-
-            @if(Route::current()->getName() != 'article.search')
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
-                            <div class="mr-auto">
-                                <a href="{{ route('article.all') }}" class="icon-view view-module {{ (Route::current()->getName() == 'article.all') ? 'active' : '' }}"><span class="icon-view_module"></span></a>
-                                <a href="{{ route('article.all.list') }}" class="icon-view view-list {{ (Route::current()->getName() == 'article.all.view_list') ? 'active' : '' }}"><span class="icon-view_list"></span></a>
-                            </div>
-                            <div class="ml-auto d-flex align-items-center">
-                                <div>
-                                    @if(Route::current()->getName() == 'article.all')
-                                        <a href="{{ route('article.all') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
-                                        <a href="{{ url('/card/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
-                                    @else
-                                        <a href="{{ route('article.all.list') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
-                                        <a href="{{ url('/list/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
         </div>
     </div>
 @endsection
@@ -168,7 +144,7 @@
                                                 <span class="offer-type bg-success">Rent</span>
                                             @endif
                                         </div>
-                                        <img src="{{ '/photos/'.$article->photo[0]->path }}" alt="Image" class="img-fluid">
+                                        <img src="{{ '/storage/photos/'.$article->photo[0]->path }}" alt="Image" class="img-fluid">
                                     </a>
                                     <div class="p-4 property-body">
                                         <h2 class="property-title"><a href="{{ route('article.show',['id' => $article->id]) }}">{{ $article->title }}</a></h2>
