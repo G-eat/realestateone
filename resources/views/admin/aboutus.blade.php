@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin-includes.app')
 
 @section('title') RealEstateOne | Admin-AboutUs @endsection
 
@@ -10,7 +10,7 @@
                     <div class="card-header">About-us</div>
 
                     <div class="card-body">
-{{--                            <form action="{{ route('update.aboutus') }}" method="post" class="form-group">--}}
+{{--                            <form action="{{ route('aboutus.update') }}" method="post" class="form-group">--}}
 {{--                                @csrf--}}
                         <label class="font-weight-bold" for="title">Title :</label>
                         <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Title" value="{{ (old('title')) ? old('title') : $aboutus->title }}">
@@ -66,7 +66,7 @@
                 });
                 $.ajax(
                     {
-                        url: "/update/about-us",
+                        url: "/admin/update/about-us",
                         type: 'POST',
                         dataType: 'html',
                         data:{

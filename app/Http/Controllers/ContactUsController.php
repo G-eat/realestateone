@@ -13,7 +13,7 @@ class ContactUsController extends Controller
     public function index()
     {
         $article = Article::inRandomOrder()->first();
-        return view('contactus')->with('article',$article);
+        return view('article.contactus')->with('article',$article);
     }
 
     public function sendmessage (ContactUsRequest $request)

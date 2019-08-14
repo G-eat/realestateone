@@ -1,4 +1,4 @@
-@extends('includes.app')
+@extends('client-includes.app')
 
 @section('title') RealEstateOne | {{ $article->title }} @endsection
 

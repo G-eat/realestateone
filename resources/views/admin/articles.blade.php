@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin-includes.app')
 
 @section('title') RealEstateOne | Admin-Articles @endsection
 
@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">Articles</div>
                     <div class="container">
-                        <a class="btn btn-primary mt-2 mb-2" style="float: right" href="{{ route('create.article') }}">Create</a>
+                        <a class="btn btn-primary mt-2 mb-2" style="float: right" href="{{ route('article.create') }}">Create</a>
                         <div class="card-body">
                             <table class="table table-bordered" id="articles-table">
                                 <thead>

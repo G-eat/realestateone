@@ -34,11 +34,13 @@ class SearchRequest extends FormRequest
      *
      * @return array
      */
-//    public function messages()
-//    {
-//        return [
-//            'price_from.required_with:price_to' => 'The From field is required when To is present.',
-//            'price_to.required_with:price_from' => 'The To field is required when From is present.',
-//        ];
-//    }
+    public function messages()
+    {
+        return [
+            'price_from.required_with:price_to' => 'The From field is required when To is present.',
+            'price_to.required_with:price_from' => 'The To field is required when From is present.',
+            'price_from.lte:price_to'           => 'Error',
+            'price_to.integer'                  => 'Error',
+        ];
+    }
 }

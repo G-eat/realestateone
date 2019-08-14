@@ -65,7 +65,7 @@
                     </div>
                     <ul class="list-sidebar bg-defoult">
                         <li> <a href="{{ route('home') }}" class="collapsed active"> <i class="fa fa-th-large"></i> <span class="nav-label"> Dashboards </span></a></li>
-                        <li> <a href="{{ route('all_articles') }}"><i class="fa fa-eye"></i> <span class="nav-label">ClientSide</span></a> </li>
+                        <li> <a href="{{ route('article.all') }}"><i class="fa fa-eye"></i> <span class="nav-label">ClientSide</span></a> </li>
                         <li> <a href="{{ route('admin.articles') }}" class="collapsed active"><i class="fa fa-table"></i> <span class="nav-label">Articles</span></a> </li>
                         <li> <a href="{{ route('admin.contactus') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Contacts</span></a> </li>
                         <li> <a href="{{ route('admin.aboutus') }}" class="collapsed active"><i class="fa fa-info"></i> <span class="nav-label">AboutUs Content</span></a> </li>
@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    @include('layouts.javascript')
+    @include('admin-includes.javascript')
 
     </body>
 </html>

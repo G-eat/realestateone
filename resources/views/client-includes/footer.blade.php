@@ -10,7 +10,7 @@
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <h3 class="footer-heading mb-4">Navigations</h3>
                     <div>
-                        <a href="{{ route('all_articles') }}" class="pl-0 pr-3">Home</a>
+                        <a href="{{ route('article.all') }}" class="pl-0 pr-3">Home</a>
                         <a href="{{ route('aboutus') }}" class="pl-3 pr-3">About</a>
                         <a href="{{ route('contactus') }}" class="pl-3 pr-3">Contact</a>
                     </div>

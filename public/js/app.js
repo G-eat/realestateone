@@ -17394,7 +17394,7 @@ return jQuery;
   }
 
   /**
-   * A specialized version of `_.includes` for arrays without support for
+   * A specialized version of `_.client-includes` for arrays without support for
    * specifying an index to search from.
    *
    * @private
@@ -18406,7 +18406,7 @@ return jQuery;
      * `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`, `findLast`,
      * `findLastIndex`, `findLastKey`, `first`, `floor`, `forEach`, `forEachRight`,
      * `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`,
-     * `hasIn`, `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`,
+     * `hasIn`, `head`, `identity`, `client-includes`, `indexOf`, `inRange`, `invoke`,
      * `isArguments`, `isArray`, `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`,
      * `isBoolean`, `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`,
      * `isEqualWith`, `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`,
@@ -23314,7 +23314,7 @@ return jQuery;
     /**
      * This function is like
      * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
-     * except that it includes inherited enumerable properties.
+     * except that it client-includes inherited enumerable properties.
      *
      * @private
      * @param {Object} object The object to query.
@@ -26223,16 +26223,16 @@ return jQuery;
      * @returns {boolean} Returns `true` if `value` is found, else `false`.
      * @example
      *
-     * _.includes([1, 2, 3], 1);
+     * _.client-includes([1, 2, 3], 1);
      * // => true
      *
-     * _.includes([1, 2, 3], 1, 2);
+     * _.client-includes([1, 2, 3], 1, 2);
      * // => false
      *
-     * _.includes({ 'a': 1, 'b': 2 }, 1);
+     * _.client-includes({ 'a': 1, 'b': 2 }, 1);
      * // => true
      *
-     * _.includes('abcd', 'bc');
+     * _.client-includes('abcd', 'bc');
      * // => true
      */
     function includes(collection, value, fromIndex, guard) {
@@ -26456,7 +26456,7 @@ return jQuery;
      * `_.reduce`, `_.reduceRight`, and `_.transform`.
      *
      * The guarded methods are:
-     * `assign`, `defaults`, `defaultsDeep`, `includes`, `merge`, `orderBy`,
+     * `assign`, `defaults`, `defaultsDeep`, `client-includes`, `merge`, `orderBy`,
      * and `sortBy`
      *
      * @static
@@ -49207,7 +49207,7 @@ $(document).ready(function () {
 
 /**
  * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
+ * client-includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(/*! ./admin */ "./resources/js/admin.js");
@@ -49323,7 +49323,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -49343,7 +49343,7 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 

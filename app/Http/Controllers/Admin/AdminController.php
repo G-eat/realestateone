@@ -1,15 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\AboutUs;
 use App\Article;
 use App\ContactUs;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+        return view('admin.home');
+    }
+
     public function articles ()
     {
         return view('admin.articles');
@@ -34,8 +40,8 @@ class AdminController extends Controller
         return Datatables::of($articles)
             ->editColumn('action', function($article) {
                 return
-                '<a href="' . route('article_show', $article->id) . '"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
-                 <a href="' . route('article_edit', $article->id) . '"><i class="fa fa-pencil text-primary" aria-hidden="true"></i></a>
+                '<a href="' . route('article.show', $article->id) . '"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
+                 <a href="' . route('article.edit', $article->id) . '"><i class="fa fa-pencil text-primary" aria-hidden="true"></i></a>
                  <a role="button" class="deleteButton" data-id="'. $article->id .'"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
             })
             ->make();
@@ -49,7 +55,7 @@ class AdminController extends Controller
         return Datatables::of($contacts)
             ->editColumn('action', function($contact) {
                 return
-                '<a href="' . route('contact_show', $contact->id) . '"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
+                '<a href="' . route('contact.show', $contact->id) . '"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
                  <a role="button" class="deleteButton" data-id="'. $contact->id .'"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
             })
             ->make();

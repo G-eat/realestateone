@@ -2,7 +2,7 @@
     <html lang="en">
         <head>
             <title>@yield('title')</title>
-            @include('includes.header')
+            @include('client-includes.header')
         </head>
         <body>
 
@@ -21,7 +21,7 @@
 
             <div class="site-loader"></div>
 
-            @include('includes.navbar')
+            @include('client-includes.navbar')
 
             @yield('navbar_background')
 
@@ -29,9 +29,9 @@
 
             @yield('content')
 
-            @include('includes.footer')
+            @include('client-includes.footer')
 
-            @include('includes.javascript')
+            @include('client-includes.javascript')
 
             <script>
                 var elementPosition = $('#navbar-fixed').offset();

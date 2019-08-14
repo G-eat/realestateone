@@ -13,7 +13,7 @@ class AboutUsController extends Controller
     {
         $article = Article::inRandomOrder()->first();
         $about_us = AboutUs::first();
-        return view('aboutus')
+        return view('article.aboutus')
                                     ->with('article',$article)
                                     ->with('about_us',$about_us);
     }

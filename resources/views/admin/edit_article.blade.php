@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin-includes.app')
 
 @section('title') RealEstateOne | Admin-Update article @endsection
 
