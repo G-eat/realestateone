@@ -25,9 +25,10 @@ class ArticleController extends Controller
             }])->orderBy('created_at', 'desc')->paginate(9);
         }
 
-//        if ($request->get('page') > $articles->lastPage() || is_int($request->get('page')) || ($request->get('page') < 1 && is_int($request->get('page'))))
+
+//        if ($request->get('page') > $articles->lastPage() || $request->get('page') == 0 || ($request->get('page') < 1 && (int)$request->get('page')))
 //        {
-//            return redirect('/')->with('status', 'Profile updated!');
+//            return redirect('/');
 //        }
 
         $randomArticles = Article::with(['photo' => function($query) {
@@ -88,7 +89,7 @@ class ArticleController extends Controller
             $query->where('price', '>=', $price_from)->where('price', '<=', $price_to);
             })
             ->when($for, function($query) use($for) {
-                $query->where('for', $for);
+                $query->where('for', $for)->orWhere('for','both');
             })
             ->when($city, function($query) use($city) {
                 $query->where('city', $city);
@@ -124,7 +125,7 @@ class ArticleController extends Controller
 
         foreach ($photos as $photo)
         {
-            Storage::delete('public/photos/'.$photo->path);
+            Storage::delete('public/photos/'.$photo->photo);
         }
 
         Photo::where('article_id',$article->id)->delete();
@@ -163,7 +164,7 @@ class ArticleController extends Controller
         foreach ($data as $photo_name) {
             $photo = new Photo();
             $photo->article_id = $article->id;
-            $photo->path = $photo_name;
+            $photo->photo = $photo_name;
             if ($first_photo === $photo_name) {
                 $photo->is_thumbnail = 1;
             } else {
@@ -208,7 +209,7 @@ class ArticleController extends Controller
                 $name=time() . '-' . $file->getClientOriginalName();
                 $file->move(public_path().'/photos/', $name);
 
-                $photo->path = $name;
+                $photo->photo = $name;
                 $photo->save();
             }
         }

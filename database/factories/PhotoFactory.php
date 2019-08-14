@@ -20,7 +20,7 @@ use Faker\Generator as Faker;
 $factory->define(Photo::class, function (Faker $faker) {
     return [
         'article_id'      => Article::all()->random()->id,
-        'path'           => $faker->imageUrl($width=800, $height=500, 'cats'),
+        'photo'           => $faker->imageUrl($width=800, $height=500, 'cats'),
         'is_thumbnail'   => $faker->numberBetween(0, 1),
         'created_at'     => now(),
         'updated_at'     => now(),

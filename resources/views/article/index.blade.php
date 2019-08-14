@@ -16,14 +16,19 @@
             </div>
         @else
             @foreach ($randomarticles as $article)
-                <div class="site-blocks-cover overlay" style="background-image: url({{ '/storage/photos/'.$article->photo[0]->path }});" data-aos="fade" data-stellar-background-ratio="0.5">
+                <div class="site-blocks-cover overlay" style="background-image: url({{ '/storage/photos/'.$article->photo[0]->photo }});" data-aos="fade" data-stellar-background-ratio="0.5">
                     <div class="container">
                         <div class="row align-items-center justify-content-center text-center">
                             <div class="col-md-10">
                                 @if ($article->for == 'sale')
                                     <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For Sale</span>
-                                @else
+                                @elseif ($article->for == 'rent')
                                     <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">For Rent</span>
+                                @else
+                                    <div style="display: flex;flex-direction: column;max-width: 200px;align-items: center;margin: 40px auto 0;">
+                                        <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For Sale</span>
+                                        <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">For Rent</span>
+                                    </div>
                                 @endif
                                 <h1 class="mb-2">{{ $article->city }}</h1>
                                 <small class="text-warning">{{ $article->address }}</small>
@@ -163,15 +168,18 @@
                                         <div class="offer-type-wrap">
                                             @if ($article->for == 'sale')
                                                 <span class="offer-type bg-danger">Sale</span>
+                                            @elseif ($article->for == 'rent')
+                                                <span class="offer-type bg-success">Rent</span>
                                             @else
+                                                <span class="offer-type bg-danger">Sale</span>
                                                 <span class="offer-type bg-success">Rent</span>
                                             @endif
                                         </div>
-                                        <img src="/storage//photos/{{ $article->photo[0]->path }}" alt="Image" class="img-fluid">
+                                        <img src="/storage//photos/{{ $article->photo[0]->photo }}" alt="Image" class="img-fluid">
                                     </a>
                                     <div class="p-4 property-body">
                                         <h2 class="property-title"><a href="{{ route('article.show',['id' => $article->id]) }}">{{ $article->title }}</a></h2>
-                                        <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ $article->address }}</span>
+                                        <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span>{{ $article->city }} - {{ $article->address }}</span>
                                         <strong class="property-price text-primary mb-3 d-block text-success">${{ $article->price }}</strong>
                                         <ul class="property-specs-wrap mb-3 mb-lg-0">
                                             <li>

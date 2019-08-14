@@ -85,7 +85,8 @@
                                         <div class="input-group-text text-primary font-weight-bold">For</div>
                                     </div>
                                     <select name="for" class="form-control" id="exampleFormControlSelect1">
-                                        <option value="sale" {{ ( old("for") == 'sale' ? "selected":"") }}>Sale</option>
+                                        <option value="both" {{ ( old("for") == 'both' ? "selected":"") }}>Both</option>
+                                        <option value="sale" {{ ( old("for") == 'sale' ? "selected": ($article->for) == 'sale' ? 'selected' : "") }}>Sale</option>
                                         <option value="rent" {{ ( old("for") == 'rent' ? "selected": ($article->for) == 'rent' ? 'selected' : "") }}>Rent</option>
                                     </select>
                                 </div>
