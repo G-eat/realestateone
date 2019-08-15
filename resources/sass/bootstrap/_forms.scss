@@ -184,7 +184,7 @@ textarea.form-control {
 
 // Form grid
 //
-// Special replacement for our grid system's `.row` for tighter form admin-client-includes.
+// Special replacement for our grid system's `.row` for tighter form layouts.
 
 .form-row {
   display: flex;
@@ -244,7 +244,7 @@ textarea.form-control {
 //
 // Provide feedback to users when form field values are valid or invalid. Works
 // primarily for client-side validation via scoped `:invalid` and `:valid`
-// pseudo-classes but also client-includes `.is-invalid` and `.is-valid` classes for
+// pseudo-classes but also includes `.is-invalid` and `.is-valid` classes for
 // server side validation.
 
 @include form-validation-state("valid", $form-feedback-valid-color);

@@ -12,7 +12,7 @@
 // Fluid container
 //
 // Utilizes the mixin meant for fixed width containers, but with 100% width for
-// fluid, full width admin-client-includes.
+// fluid, full width layouts.
 
 @if $enable-grid-classes {
   .container-fluid {

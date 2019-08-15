@@ -17,6 +17,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="../css/toastr.min.css" rel="stylesheet"/>
+{{--    <link href="{{ asset('toastr/css/toastr.css') }}" rel="stylesheet"/>--}}
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 
 </head>

@@ -70,8 +70,18 @@ class ArticleController extends Controller
 
         $photos = $article->photo;
 
+        $related_articles = Article::whereHas('photo', function ($query){
+            $query->where('is_thumbnail',1);
+        })->where('id','<>',$id)
+            ->where(function ($query) use ($article){
+                $query->where('city', '=', $article->city)
+                        ->orWhereBetween('price', [$article->price - 200, $article->price + 200]);
+            })
+        ->take(3)->get();
+
         return view('article.show')
                                         ->with('article', $article)
+                                        ->with('related_articles', $related_articles)
                                         ->with('photos', $photos);
     }
 

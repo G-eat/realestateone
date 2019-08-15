@@ -34,8 +34,7 @@ class AdminController extends Controller
 
     public function articlesdatatable()
     {
-        $articles = Article::select(['id','title','city','address','type','phonenumber'])
-            ->orderBy('created_at','desc');
+        $articles = Article::select(['id','title','city','address','type','phonenumber']);
 
         return Datatables::of($articles)
             ->editColumn('action', function($article) {
@@ -49,8 +48,7 @@ class AdminController extends Controller
 
     public function contactusdatatable()
     {
-        $contacts = ContactUs::select(['id','name','email','subject','created_at'])
-            ->orderBy('created_at','desc');
+        $contacts = ContactUs::select(['id','name','email','subject','created_at']);
 
         return Datatables::of($contacts)
             ->editColumn('action', function($contact) {

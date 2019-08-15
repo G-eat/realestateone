@@ -93,6 +93,48 @@
                     </div>
                 </div>
 
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="site-section-title mb-5">
+                            <h2>Related Properties</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    @foreach($related_articles as $article)
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="property-entry h-100">
+                                <a href="{{ route('article.show',$article->id) }}" class="property-thumbnail">
+                                    <div class="offer-type-wrap">
+                                        @if ($article->for == 'sale')
+                                            <span class="offer-type bg-danger">Sale</span>
+                                        @elseif ($article->for == 'rent')
+                                            <span class="offer-type bg-success">Rent</span>
+                                        @else
+                                            <span class="offer-type bg-danger">Sale</span>
+                                            <span class="offer-type bg-success">Rent</span>
+                                        @endif
+                                    </div>
+                                    <img src="{{ '/storage/photos/'.$article->photo[0]->photo }}" alt="Image" class="img-fluid">
+                                </a>
+                                <div class="p-4 property-body">
+                                    <h2 class="property-title"><a href="property-details.html">{{ $article->title }}</a></h2>
+                                    <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span>{{ $article->city }} - {{ $article->address }}</span>
+                                    <strong class="property-price text-primary mb-3 d-block text-success">${{ $article->price }}</strong>
+                                    <ul class="property-specs-wrap mb-3 mb-lg-0">
+                                        <li>
+                                            <span class="property-specs">Type</span>
+                                            <span class="property-specs-number">{{ $article->type }}</span>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>

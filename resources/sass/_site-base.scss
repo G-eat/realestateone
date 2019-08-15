@@ -6,11 +6,11 @@ body {
 	font-family: $font-family-monospace;
 	font-family: $font-family-sans-serif;
 }
-::-moz-selection { 
+::-moz-selection {
 	background: $black;
 	color: $white;
 }
-::selection { 
+::selection {
 	background: $black;
 	color: $white;
 }
@@ -59,7 +59,7 @@ a {
 		width: 100%;
 		z-index: 2;
 		overflow: hidden;
-		
+
 		&:before {
 			opacity: 1;
 			visibility: visible;
@@ -114,7 +114,7 @@ a {
 			}
 		}
 	}
-	
+
 }
 
 .bg-black {
@@ -157,14 +157,14 @@ a {
 
 .bg-image {
 	background-size: cover;
-	background-repeat: no-rpeeat;
+	background-repeat: no-repeat;
 	overflow: hidden;
 	background-position: center center;
 	&.center {
 		background-position: top center;
 	}
 	&.fixed {
-		background-position: fixed!important;
+		background-position: fixed !important;
 	}
 	&.overlay, &.overlay-primary, &.overlay-info, &.overlay-success, &.overlay-warning {
 		position: relative;
@@ -274,15 +274,15 @@ a {
 		padding: 7em 0;
 	}
 	p {
-		color: lighten($black, 45%); 
+		color: lighten($black, 45%);
 	}
 	h2,h3,h4,h5 {
 		color: $white;
 	}
 	a {
-		color: lighten($black, 60%); 
+		color: lighten($black, 60%);
 		&:hover {
-			color: lighten($black, 100%); 
+			color: lighten($black, 100%);
 		}
 	}
 	ul {
@@ -296,7 +296,7 @@ a {
 		letter-spacing: .1em;
 		color: $white;
 		position: relative;
-		
+
 		// border-bottom: 2px solid $primary;
 		padding-bottom: 15px;
 		&:before {

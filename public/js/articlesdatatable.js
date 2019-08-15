@@ -2,6 +2,7 @@ $(function() {
     $('#articles-table').DataTable({
         processing: true,
         serverSide: true,
+        order : [[0, 'desc']],
         ajax: '/admin/data/articles',
         columns: [
             { data: 'id', name: 'id' },

@@ -2,6 +2,7 @@ $(function() {
     $('#contactsus-table').DataTable({
         processing: true,
         serverSide: true,
+        order : [[0, 'desc']],
         ajax: '/admin/data/contactsus',
         columns: [
             { data: 'id', name: 'id' },

@@ -3,9 +3,25 @@
  * client-includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-require('./admin');
 
 require('./bootstrap');
+
+require('./jquery-3.3.1.min');
+require('./jquery-migrate-3.0.1.min');
+require('./jquery-ui');
+require('./popper.min');
+require('./bootstrap.min');
+require('./owl.carousel.min');
+require('./mediaelement-and-player.min');
+require('./jquery.stellar.min');
+require('./jquery.countdown.min');
+require('./jquery.magnific-popup.min');
+require('./bootstrap-datepicker.min');
+require('./aos');
+require('./main');
+// require('./player');
+// require('./circleaudioplayer');
+// require('./slick.min');
 
 window.Vue = require('vue');
 
