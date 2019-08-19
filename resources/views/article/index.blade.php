@@ -5,7 +5,7 @@
 @section('navbar_background')
     <div class="slide-one-item home-slider owl-carousel">
         @if(count($randomarticles) == 0)
-            <div class="site-blocks-cover overlay" style="background-image: url({{ '/storage/photos/default.jpg' }});" data-aos="fade" data-stellar-background-ratio="0.5">
+            <div class="site-blocks-cover overlay" style="background-image: {{ URL::asset('storage//photos/default.jpg' }};" data-aos="fade" data-stellar-background-ratio="0.5">
                 <div class="container">
                     <div class="row align-items-center justify-content-center text-center">
                         <div class="col-md-10">
@@ -16,7 +16,7 @@
             </div>
         @else
             @foreach ($randomarticles as $article)
-                <div class="site-blocks-cover overlay" style="background-image: url({{ '/storage/photos/'.$article->photo[0]->photo }});" data-aos="fade" data-stellar-background-ratio="0.5">
+                <div class="site-blocks-cover overlay" style="background-image: {{ URL::asset('storage//photos/'.$article->photo[0]->photo)}} ;" data-aos="fade" data-stellar-background-ratio="0.5">
                     <div class="container">
                         <div class="row align-items-center justify-content-center text-center">
                             <div class="col-md-10">
@@ -175,7 +175,7 @@
                                                 <span class="offer-type bg-success">Rent</span>
                                             @endif
                                         </div>
-                                        <img src="/storage//photos/{{ $article->photo[0]->photo }}" alt="Image" class="img-fluid">
+                                        <img src="{{ URL::asset('storage//photos/'.$article->photo[0]->photo) }}" alt="Image" class="img-fluid">
                                     </a>
                                     <div class="p-4 property-body">
                                         <h2 class="property-title"><a href="{{ route('article.show',['id' => $article->id]) }}">{{ $article->title }}</a></h2>

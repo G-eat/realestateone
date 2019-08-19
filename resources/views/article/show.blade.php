@@ -3,7 +3,7 @@
 @section('title') RealEstateOne | {{ $article->title }} @endsection
 
 @section('navbar_background')
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ '/storage/photos/'.$article->photo[0]->photo }});" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="{{ URL::asset('storage//photos/default.jpg' }};" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
@@ -24,7 +24,7 @@
                     <div>
                         <div class="slide-one-item home-slider owl-carousel">
                             @foreach ($photos as $photo)
-                                <div><img src="{{ '/storage/photos/'.$photo->photo }}" alt="Image" class="img-fluid"></div>
+                                <div><img src="{{ URL::asset('storage//photos/'.$photo->photo) }}" alt="Image" class="img-fluid"></div>
                             @endforeach
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                             </div>
                             @foreach ($photos as $photo)
                                 <div class="col-sm-6 col-md-4 col-lg-3">
-                                    <a href="{{ '/storage/photos/'.$photo->photo }}" class="image-popup gal-item"><img src="{{ '/storage/photos/'.$photo->photo }}" alt="Image" class="img-fluid"></a>
+                                    <a href="{{ URL::asset('storage//photos/'.$photo->photo) }}" class="image-popup gal-item"><img src="{{ '/storage/photos/'.$photo->photo }}" alt="Image" class="img-fluid"></a>
                                 </div>
                             @endforeach
                         </div>
@@ -120,7 +120,7 @@
                                             <span class="offer-type bg-success">Rent</span>
                                         @endif
                                     </div>
-                                    <img src="{{ '/storage/photos/'.$article->photo[0]->photo }}" alt="Image" class="img-fluid">
+                                    <img src="{{ URL::asset('storage//photos/'.$article->photo[0]->photo) }}" alt="Image" class="img-fluid">
                                 </a>
                                 <div class="p-4 property-body">
                                     <h2 class="property-title"><a href="property-details.html">{{ $article->title }}</a></h2>
