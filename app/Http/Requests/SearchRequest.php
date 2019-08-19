@@ -43,4 +43,17 @@ class SearchRequest extends FormRequest
             'price_to.integer'                  => 'Error',
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'price_from' => '"From"',
+            'price_to' => '"To"'
+        ];
+    }
 }

@@ -167,6 +167,13 @@ class ArticleController extends Controller
         Photo::where('article_id',$article->id)->delete();
     }
 
+    public function show ($id) {
+        $article = Article::findorFail($id);
+
+        return view('admin.article_show')
+                                        ->with('article', $article);
+    }
+
     public function articlesdatatable()
     {
         $articles = Article::select(['id','title','city','address','type','phonenumber']);
@@ -174,7 +181,7 @@ class ArticleController extends Controller
         return Datatables::of($articles)
             ->editColumn('action', function($article) {
                 return
-                    '<a href="' . route('article.show', $article->id) . '" target="_blank"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
+                    '<a href="' . route('admin.article_show', $article->id) . '" target="_blank"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
                  <a href="' . route('article.edit', $article->id) . '"><i class="fa fa-pencil text-primary" aria-hidden="true"></i></a>
                  <a role="button" class="deleteButton" data-id="'. $article->id .'"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
             })

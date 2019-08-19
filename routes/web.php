@@ -46,6 +46,7 @@ Route::group([
 
         Route::get('/contact/{id}', 'Admin\ContactUsController@show')->name('contact.show');
 
+        Route::get('/admin/property/{id}', 'Admin\ArticleController@show')->name('admin.article_show');
         Route::get('/create-article', 'Admin\ArticleController@create')->name('article.create');
         Route::post('/create-article', 'Admin\ArticleController@store')->name('article.store');
         Route::get('/edit/{id}', 'Admin\ArticleController@edit')->name('article.edit');
