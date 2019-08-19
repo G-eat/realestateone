@@ -3,7 +3,7 @@
 @section('title') RealEstateOne | {{ $article->title }} @endsection
 
 @section('navbar_background')
-    <div class="site-blocks-cover inner-page-cover overlay" style="{{ URL::asset('storage//photos/default.jpg' }};" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ URL::asset('storage//photos/default.jpg') }});" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
