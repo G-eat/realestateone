@@ -13,17 +13,17 @@
                 </div>
             </div>
         </div>
-    @else
-        <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ URL::asset('storage//photos/'.$article->photo[0]->photo)}});" data-aos="fade" data-stellar-background-ratio="0.5">
-            <div class="container">
-                <div class="row align-items-center justify-content-center text-center">
-                    <div class="col-md-10">
-                        <h1 class="mb-2">About RealEstateOne</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
+{{--    @else--}}
+{{--        <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ URL::asset('storage//photos/'.$article->photo[0]->photo)}});" data-aos="fade" data-stellar-background-ratio="0.5">--}}
+{{--            <div class="container">--}}
+{{--                <div class="row align-items-center justify-content-center text-center">--}}
+{{--                    <div class="col-md-10">--}}
+{{--                        <h1 class="mb-2">About RealEstateOne</h1>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    @endif--}}
 @endsection
 
 @section('content')

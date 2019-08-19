@@ -120,7 +120,7 @@
                                             <span class="offer-type bg-success">Rent</span>
                                         @endif
                                     </div>
-                                    <img src="{{ URL::asset('storage//photos/'.$article->photo) }}" alt="Image" class="img-fluid">
+                                    <img src="{{ URL::asset('storage//photos/'.$article->photo->photo) }}" alt="Image" class="img-fluid">
                                 </a>
                                 <div class="p-4 property-body">
                                     <h2 class="property-title"><a href="property-details.html">{{ $article->title }}</a></h2>
