@@ -31,7 +31,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <img src="{{ URL::asset('storage//photos/about.jpg') }}" alt="Image" class="img-fluid">
+                    <img src="http://safir-school.com/wp-content/uploads/2016/01/aboutus.jpg" alt="Image" class="img-fluid">
                 </div>
                 <div class="col-md-5 ml-auto"  data-aos="fade-up" data-aos-delay="200">
                     @if(!$about_us)
