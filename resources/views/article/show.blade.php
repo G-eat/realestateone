@@ -79,7 +79,7 @@
                             </div>
                             @foreach ($photos as $photo)
                                 <div class="col-sm-6 col-md-4 col-lg-3">
-                                    <a href="{{ URL::asset('storage//photos/'.$photo->photo) }}" class="image-popup gal-item"><img src="{{ '/storage/photos/'.$photo->photo }}" alt="Image" class="img-fluid"></a>
+                                    <a href="{{ URL::asset('storage//photos/'.$photo->photo) }}" class="image-popup gal-item"><img src="{{ URL::asset('storage//photos/'.$photo->photo) }}" alt="Image" class="img-fluid"></a>
                                 </div>
                             @endforeach
                         </div>
