@@ -3,7 +3,7 @@
 @section('title') RealEstateOne | AboutUs @endsection
 
 @section('navbar_background')
-    @if(!$article)
+{{--    @if(!$article)--}}
         <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('https://iciimg.us/resources/movein/move-in-ready-large.jpg');" data-aos="fade" data-stellar-background-ratio="0.5">
             <div class="container">
                 <div class="row align-items-center justify-content-center text-center">

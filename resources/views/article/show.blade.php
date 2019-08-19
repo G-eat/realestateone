@@ -3,7 +3,7 @@
 @section('title') RealEstateOne | {{ $article->title }} @endsection
 
 @section('navbar_background')
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('https://iciimg.us/resources/movein/move-in-ready-large.jpg');" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ URL::asset('storage//photos/'.$article->photo[0]->photo)}});" data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-10">
@@ -120,7 +120,7 @@
                                             <span class="offer-type bg-success">Rent</span>
                                         @endif
                                     </div>
-                                    <img src="{{ URL::asset('storage//photos/'.$article->photo->photo) }}" alt="Image" class="img-fluid">
+                                    <img src="{{ URL::asset('storage//photos/'.$photo) }}" alt="Image" class="img-fluid">
                                 </a>
                                 <div class="p-4 property-body">
                                     <h2 class="property-title"><a href="property-details.html">{{ $article->title }}</a></h2>
