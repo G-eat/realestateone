@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
 use App\Article;
 use App\ContactUs;
+use App\Http\Controllers\Controller;
 use App\Events\SendEmailOfContactUsEvent;
 use App\Http\Requests\ContactUsRequest;
 use Illuminate\Http\Request;
@@ -35,16 +36,16 @@ class ContactUsController extends Controller
         return redirect('/')->with($notification);
     }
 
-    public function destroy ($id)
-    {
-        $contact = ContactUs::findOrFail($id);
-        $contact->delete();
-    }
-
-    public function show ($id)
-    {
-        $contact = ContactUs::findorFail($id);
-
-        return view('admin.contact_show')->with('contact',$contact);
-    }
+//    public function destroy ($id)
+//    {
+//        $contact = ContactUs::findOrFail($id);
+//        $contact->delete();
+//    }
+//
+//    public function show ($id)
+//    {
+//        $contact = ContactUs::findorFail($id);
+//
+//        return view('admin.contact_show')->with('contact',$contact);
+//    }
 }

@@ -93,13 +93,17 @@
                     </div>
                 </div>
 
-                <div class="row mt-5">
-                    <div class="col-12">
+                @if(count($related_articles))
+                    <div class="col-12 mt-5">
                         <div class="site-section-title mb-5">
                             <h2>Related Properties</h2>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="mt-5 col-12">
+                        <p class="alert alert-warning">There's no properties related to this.</p>
+                    </div>
+                @endif
 
                 <div class="row mb-5">
                     @foreach($related_articles as $article)

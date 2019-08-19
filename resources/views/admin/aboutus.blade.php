@@ -57,7 +57,7 @@
                 var num =1;
             }
 
-            if (num != 1) {
+            if (true) {
 
                 $.ajaxSetup({
                     headers: {
@@ -67,7 +67,7 @@
                 $.ajax(
                     {
                         url: "/admin/update/about-us",
-                        type: 'POST',
+                        type: 'PUT',
                         dataType: 'html',
                         data:{
                             title: title,
@@ -77,7 +77,9 @@
                         {
                             if(response == 'Success') {
                                 toastr.success('You updated about-us.', 'Success Alert', {timeOut: 5000});
-                            }  else {
+                            } else if(response == 'Empty'){
+                                toastr.error('Title and body are required.', 'Inconceivable!', {timeOut: 5000});
+                            } else {
                                 toastr.warning('You didnt change anything.', 'Inconceivable!', {timeOut: 5000});
                             }
                         },

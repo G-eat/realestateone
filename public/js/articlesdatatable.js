@@ -5,7 +5,7 @@ $(function() {
         order : [[0, 'desc']],
         ajax: '/admin/data/articles',
         columns: [
-            { data: 'id', name: 'id' },
+            { data: 'id', name: 'id' , searchable: false},
             { data: 'title', name: 'title' },
             { data: 'city', name: 'city' },
             { data: 'address', name: 'address' },

@@ -3,7 +3,7 @@
 @section('title') RealEstateOne | AboutUs @endsection
 
 @section('navbar_background')
-    @if(!$article->photo[0]->photo)
+    @if(!$article)
         <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{ '/storage/photos/default.jpg' }});" data-aos="fade" data-stellar-background-ratio="0.5">
             <div class="container">
                 <div class="row align-items-center justify-content-center text-center">

@@ -28,7 +28,7 @@ class UpdateArticleRequest extends FormRequest
             'body'  => 'required',
             'price' => 'required',
             'address' => 'required',
-            'phone_number' => 'required',
+            'phonenumber' => 'required',
             'filenames' => 'max:2048',
             'filenames.*' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];

@@ -7,6 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-11 pb-5">
                 <form action="{{ route('article.update', $article->id) }}" method="post" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <div class="card border-primary rounded-0">
                         <div class="card-header p-0">
@@ -144,9 +145,9 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text text-primary font-weight-bold">Telephone</div>
                                     </div>
-                                    <input name="phone_number" type="tel" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" value="{{ old('phone_number') ? old('phone_number') : $article->phonenumber }}">
+                                    <input name="phonenumber" type="tel" class="form-control @error('phonenumber') is-invalid @enderror" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" value="{{ old('phone_number') ? old('phone_number') : $article->phonenumber }}">
 
-                                    @error('phone_number')
+                                    @error('phonenumber')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -157,7 +158,7 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">Add more photos</div>
+                                        <div class="input-group-text text-primary font-weight-bold">Upload photos</div>
                                     </div>
                                     <input type="file" class="form-control @error('filenames') is-invalid @enderror" name="filenames[]" multiple="multiple">
 
