@@ -6,6 +6,7 @@ use App\AboutUs;
 use App\Article;
 use App\ContactUs;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 

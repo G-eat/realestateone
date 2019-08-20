@@ -3,7 +3,7 @@ $(function() {
         processing: true,
         serverSide: true,
         order : [[0, 'desc']],
-        ajax: '/admin/data/articles',
+        ajax: 'admin/data/articles',
         columns: [
             { data: 'id', name: 'id' , searchable: false},
             { data: 'title', name: 'title' },

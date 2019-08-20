@@ -29,16 +29,25 @@
     <header class="header">
         <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0">
             @auth
-                <a class="button-left pt-2 pb-2" style="color: white;text-decoration: none; cursor: pointer"><span class="fa fa-fw fa-bars mr-2"></span>AdminPannel</a>
+                @can('admin')
+                    <a class="button-left pt-2 pb-2" style="color: white;text-decoration: none; cursor: pointer"><span class="fa fa-fw fa-bars mr-2"></span>AdminPannel</a>
+                @elsecan('user')
+                    <a class="button-left pt-2 pb-2" style="color: white;text-decoration: none; cursor: pointer"><span class="fa fa-fw fa-bars mr-2"></span>UserPannel</a>
+                @else
+                    <a class="button-left pt-2 pb-2" style="color: white;text-decoration: none; cursor: pointer"><span class="fa fa-fw fa-bars mr-2"></span>Pannel</a>
+                @endcan
             @else
-                <a style="color: white;text-decoration: none;">AdminPannel</a>
+                <a style="color: white;text-decoration: none;">Pannel</a>
             @endauth
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
             @guest
                 <li class="nav-item">
-                    <a class="nav-link in" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'login' ? 'in' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'register' ? 'in' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </li>
             @else
                 <li class="nav-item">
@@ -66,10 +75,15 @@
                     </div>
                     <ul class="list-sidebar bg-defoult">
                         <li> <a href="{{ route('home') }}" class="collapsed active"> <i class="fa fa-th-large"></i> <span class="nav-label"> Dashboards </span></a></li>
-                        <li> <a href="{{ route('article.all') }}"><i class="fa fa-eye"></i> <span class="nav-label">ClientSide</span></a> </li>
-                        <li> <a href="{{ route('admin.articles') }}" class="collapsed active"><i class="fa fa-table"></i> <span class="nav-label">Articles</span></a> </li>
-                        <li> <a href="{{ route('admin.contactus') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Contacts</span></a> </li>
-                        <li> <a href="{{ route('admin.aboutus') }}" class="collapsed active"><i class="fa fa-info"></i> <span class="nav-label">AboutUs Content</span></a> </li>
+                        @can('admin')
+                            <li> <a href="{{ route('article.all') }}"><i class="fa fa-eye"></i> <span class="nav-label">ClientSide</span></a> </li>
+                            <li> <a href="{{ route('articles') }}" class="collapsed active"><i class="fa fa-table"></i> <span class="nav-label">Articles</span></a> </li>
+                            <li> <a href="{{ route('admin.contactus') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Contacts</span></a> </li>
+                            <li> <a href="{{ route('admin.aboutus') }}" class="collapsed active"><i class="fa fa-info"></i> <span class="nav-label">AboutUs Content</span></a> </li>
+                        @else
+                            <li> <a href="{{ route('article.all') }}"><i class="fa fa-eye"></i> <span class="nav-label">AllArticles</span></a> </li>
+                            <li> <a href="{{ route('articles') }}" class="collapsed active"><i class="fa fa-table"></i> <span class="nav-label">MyArticles</span></a> </li>
+                        @endcan
                     </ul>
                 </div>
             </aside>

@@ -10,8 +10,10 @@ use Faker\Provider\File;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Http\Requests\SearchRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -51,6 +53,7 @@ class ArticleController extends Controller
         }
 
         $article = Article::create([
+            'user_id'       => Auth::user()->id,
             'title'         => $request->input('title'),
             'body'          => $request->input('body'),
             'city'          => $request->input('city'),
@@ -82,7 +85,7 @@ class ArticleController extends Controller
             'alert-type' => 'success'
         ];
 
-        return redirect('/admin/articles') ->with($notification);
+        return redirect('/articles') ->with($notification);
     }
 
     public function update(UpdateArticleRequest $request, $id)
@@ -99,7 +102,7 @@ class ArticleController extends Controller
                 'alert-type' => 'warning'
             ];
 
-            return redirect('/admin/articles') ->with($notification);
+            return redirect('/articles') ->with($notification);
         } else {
             if ($changes)
             {
@@ -141,7 +144,7 @@ class ArticleController extends Controller
                 'alert-type' => 'success'
             ];
 
-            return redirect('/admin/articles') ->with($notification);
+            return redirect('/articles') ->with($notification);
         }
     }
     public function change($data,$article)
@@ -176,7 +179,14 @@ class ArticleController extends Controller
 
     public function articlesdatatable()
     {
-        $articles = Article::select(['id','title','city','address','type','phonenumber']);
+        if (Gate::allows('admin')) {
+            $articles = Article::select(['id','title','city','address','type','phonenumber']);
+        }
+
+        if (Gate::allows('user')) {
+            $user = Auth::user();
+            $articles = Article::where('user_id','=',$user->id)->select(['id','title','city','address','type','phonenumber']);
+        }
 
         return Datatables::of($articles)
             ->editColumn('action', function($article) {

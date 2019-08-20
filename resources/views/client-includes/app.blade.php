@@ -10,7 +10,11 @@
                 <nav class="navbar" id="navbar-fixed" style="background: #3c8dbc;">
                     <div class="container">
                         <a href="{{ route('home') }}" class="text-white">
-                            AdminPannel
+                            @can('admin')
+                                AdminPannel
+                            @elsecan('user')
+                                UserPannel
+                            @endcan
                         </a>
                         <a href="{{ route('logout') }}" class="text-white">
                             {{ __('Logout') }}
