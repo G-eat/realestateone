@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-8 mb-5">
                     <form action="{{ route('send.message') }}" class="p-5 bg-white border" method="post">
-                        @csrf
+{{--                        @csrf--}}
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="fullname">Full Name</label>
