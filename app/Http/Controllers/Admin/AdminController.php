@@ -17,10 +17,10 @@ class AdminController extends Controller
         return view('admin.home');
     }
 
-    public function articles ()
-    {
-        return view('admin.articles');
-    }
+//    public function articles ()
+//    {
+//        return view('admin.articles');
+//    }
 
     public function contactus ()
     {

@@ -44,26 +44,34 @@ Route::group([
 //        Route::get('admin/data/articles', 'Admin\ArticleController@articlesdatatable')->name('data.articles');
         Route::get('admin/data/contactsus', 'Admin\ContactUsController@contactusdatatable')->name('data.contactus');
 
-        Route::delete('/article/delete/{id}', 'Admin\ArticleController@destroy')->name('destroy.article');
+//        Route::delete('/article/delete/{id}', 'Admin\ArticleController@destroy')->name('destroy.article');
         Route::delete('/contact/delete/{id}', 'Admin\ContactUsController@destroy')->name('destroy.contact');
 
         Route::get('/contact/{id}', 'Admin\ContactUsController@show')->name('contact.show');
 
-        Route::get('/admin/property/{id}', 'Admin\ArticleController@show')->name('admin.article_show');
+//        Route::get('/admin/property/{id}', 'Admin\ArticleController@show')->name('admin.article_show');
 //        Route::get('/create-article', 'Admin\ArticleController@create')->name('article.create');
 //        Route::post('/create-article', 'Admin\ArticleController@store')->name('article.store');
-        Route::get('/edit/{id}', 'Admin\ArticleController@edit')->name('article.edit');
-        Route::put('/update-article/{id}', 'Admin\ArticleController@update')->name('article.update');
+//        Route::get('/edit/{id}', 'Admin\ArticleController@edit')->name('article.edit');
+//        Route::put('/update-article/{id}', 'Admin\ArticleController@update')->name('article.update');
 
         Route::put('/update/about-us', 'Admin\AboutUsController@update')->name('aboutus.update');
     });
 });
 
-Route::get('home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('articles', 'Admin\AdminController@articles')->name('articles')->middleware('auth');
-Route::get('/create-article', 'Admin\ArticleController@create')->name('article.create')->middleware('auth');
-Route::post('/create-article', 'Admin\ArticleController@store')->name('article.store')->middleware('auth');
-Route::get('admin/data/articles', 'Admin\ArticleController@articlesdatatable')->name('data.articles')->middleware('auth');
+Route::group(['middleware' => ['auth']] , function(){
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('articles', 'ArticleController@articles')->name('articles');
+    Route::get('/create-article', 'ArticleController@create')->name('article.create');
+    Route::post('/create-article', 'ArticleController@store')->name('article.store');
+
+    Route::get('admin/data/articles', 'Admin\ArticleController@articlesdatatable')->name('data.articles');
+
+    Route::get('/admin/property/{id}', 'ArticleController@show')->name('admin.article_show');
+    Route::get('/edit/{id}', 'ArticleController@edit')->name('article.edit');
+    Route::delete('/article/delete/{id}', 'ArticleController@destroy')->name('destroy.article');
+    Route::put('/update-article/{id}', 'ArticleController@update')->name('article.update');
+});
 
 Route::group([] , function(){
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

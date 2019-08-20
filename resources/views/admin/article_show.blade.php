@@ -47,7 +47,7 @@
                         Updated : {{ $article->updated_at }}
                     </div>
                 </div>
-                <a class="btn btn-secondary mt-2" href="{{ route('admin.articles') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                <a class="btn btn-secondary mt-2" href="{{ route('articles') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
                 <div style="float: right">
                     <a class="btn btn-secondary mt-2" href="{{ route('article.edit', $article->id) }}">Edit</a>
                     <a class="btn btn-secondary mt-2" href="{{ route('article.show', $article->id) }}">Show</a>
