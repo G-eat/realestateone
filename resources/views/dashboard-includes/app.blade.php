@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    @include('admin-includes.javascript')
+    @include('dashboard-includes.javascript')
 
     </body>
 </html>

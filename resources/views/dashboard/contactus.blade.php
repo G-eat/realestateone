@@ -1,4 +1,4 @@
-@extends('admin-includes.app')
+@extends('dashboard-includes.app')
 
 @section('title') RealEstateOne | Admin-ContactUs @endsection
 

@@ -1,6 +1,6 @@
-@extends('admin-includes.app')
+@extends('dashboard-includes.app')
 
-@section('title') RealEstateOne | Admin-ContactUs @endsection
+@section('title') RealEstateOne @endsection
 
 @section('content')
     <div>
@@ -8,6 +8,14 @@
             <div class="col-md-11">
                 <div class="card">
                     <div class="card-header">Title : {{ $article->title }}</div>
+                    @can('admin')
+                        <div class="card-footer">
+                            User-ID : {{ $article->user_id }}
+                        </div>
+                        <div class="card-footer">
+                            User-Name : {{ $article->user->name }}
+                        </div>
+                    @endcan
                     <div class="card-footer">
                         Body : {{ $article->body }}
                     </div>

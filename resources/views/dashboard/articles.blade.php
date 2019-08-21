@@ -1,6 +1,6 @@
-@extends('admin-includes.app')
+@extends('dashboard-includes.app')
 
-@section('title') RealEstateOne | Admin-Articles @endsection
+@section('title') RealEstateOne | @can('admin') All-Articles @elsecan('user') My-Articles @endcan @endsection
 
 @section('content')
     <div>

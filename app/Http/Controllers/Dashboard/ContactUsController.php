@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Article;
 use App\ContactUs;
@@ -22,7 +22,7 @@ class ContactUsController extends Controller
     {
         $contact = ContactUs::findorFail($id);
 
-        return view('admin.contact_show')->with('contact',$contact);
+        return view('dashboard.contact_show')->with('contact',$contact);
     }
 
     public function contactusdatatable()

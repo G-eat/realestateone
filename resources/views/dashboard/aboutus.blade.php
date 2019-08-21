@@ -1,4 +1,4 @@
-@extends('admin-includes.app')
+@extends('dashboard-includes.app')
 
 @section('title') RealEstateOne | Admin-AboutUs @endsection
 
@@ -41,23 +41,26 @@
             var title = $('#title').val();
             var body = $('#body').val();
 
+            var num = 1;
+
             if ( body.trim().length > 480 ) {
                 toastr.error('Body is too long.', 'Inconceivable!', {timeOut: 5000});
-                var num =1;
+                num = 0;
             } else if (!body.trim()) {
                 toastr.error('Body is required.', 'Inconceivable!', {timeOut: 5000});
-                var num =1;
+                num = 0;
             }
 
             if ( title.trim().length > 191 ) {
                 toastr.error('Title is too long.', 'Inconceivable!', {timeOut: 5000});
-                var num =1;
+                num = 0;
             } else if (!title.trim()) {
                 toastr.error('Title is required.', 'Inconceivable!', {timeOut: 5000});
-                var num =1;
+                num = 0;
             }
 
-            if (true) {
+
+            if (num) {
 
                 $.ajaxSetup({
                     headers: {
@@ -66,7 +69,7 @@
                 });
                 $.ajax(
                     {
-                        url: "/admin/update/about-us",
+                        url: "/update/about-us",
                         type: 'PUT',
                         dataType: 'html',
                         data:{

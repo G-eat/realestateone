@@ -29,48 +29,35 @@ Route::group([] , function() {
 });
 
 
+
 Route::group([
-//   'prefix' => 'admin',
+   'middleware' => ['auth','preventBackHistory','can:admin'],
 ], function () {
-    Route::group([
-       'middleware' => ['auth','preventBackHistory','can:admin'],
-    ], function () {
-//        Route::get('home', 'Admin\AdminController@index')->name('home');
+    Route::get('contact-us', 'Dashboard\AdminController@contactus')->name('admin.contactus');
+    Route::get('about-us', 'Dashboard\AdminController@aboutus')->name('admin.aboutus');
 
-//        Route::get('articles', 'Admin\AdminController@articles')->name('articles');
-        Route::get('contact-us', 'Admin\AdminController@contactus')->name('admin.contactus');
-        Route::get('about-us', 'Admin\AdminController@aboutus')->name('admin.aboutus');
+    Route::get('admin/data/contactsus', 'Dashboard\ContactUsController@contactusdatatable')->name('data.contactus');
 
-//        Route::get('admin/data/articles', 'Admin\ArticleController@articlesdatatable')->name('data.articles');
-        Route::get('admin/data/contactsus', 'Admin\ContactUsController@contactusdatatable')->name('data.contactus');
+    Route::delete('/contact/delete/{id}', 'Dashboard\ContactUsController@destroy')->name('destroy.contact');
 
-//        Route::delete('/article/delete/{id}', 'Admin\ArticleController@destroy')->name('destroy.article');
-        Route::delete('/contact/delete/{id}', 'Admin\ContactUsController@destroy')->name('destroy.contact');
+    Route::get('/contact/{id}', 'Dashboard\ContactUsController@show')->name('contact.show');
 
-        Route::get('/contact/{id}', 'Admin\ContactUsController@show')->name('contact.show');
-
-//        Route::get('/admin/property/{id}', 'Admin\ArticleController@show')->name('admin.article_show');
-//        Route::get('/create-article', 'Admin\ArticleController@create')->name('article.create');
-//        Route::post('/create-article', 'Admin\ArticleController@store')->name('article.store');
-//        Route::get('/edit/{id}', 'Admin\ArticleController@edit')->name('article.edit');
-//        Route::put('/update-article/{id}', 'Admin\ArticleController@update')->name('article.update');
-
-        Route::put('/update/about-us', 'Admin\AboutUsController@update')->name('aboutus.update');
-    });
+    Route::put('/update/about-us', 'Dashboard\AboutUsController@update')->name('aboutus.update');
 });
 
+
 Route::group(['middleware' => ['auth']] , function(){
-    Route::get('home', 'HomeController@index')->name('home');
-    Route::get('articles', 'ArticleController@articles')->name('articles');
-    Route::get('/create-article', 'ArticleController@create')->name('article.create');
-    Route::post('/create-article', 'ArticleController@store')->name('article.store');
+    Route::get('home', 'Dashboard\HomeController@index')->name('home');
+    Route::get('articles', 'Dashboard\ArticleController@articles')->name('articles');
+    Route::get('/create-article', 'Dashboard\ArticleController@create')->name('article.create');
+    Route::post('/create-article', 'Dashboard\ArticleController@store')->name('article.store');
 
-    Route::get('admin/data/articles', 'Admin\ArticleController@articlesdatatable')->name('data.articles');
+    Route::get('admin/data/articles', 'Dashboard\ArticleController@articlesdatatable')->name('data.articles');
 
-    Route::get('/admin/property/{id}', 'ArticleController@show')->name('admin.article_show');
-    Route::get('/edit/{id}', 'ArticleController@edit')->name('article.edit');
-    Route::delete('/article/delete/{id}', 'ArticleController@destroy')->name('destroy.article');
-    Route::put('/update-article/{id}', 'ArticleController@update')->name('article.update');
+    Route::get('/admin/property/{id}', 'Dashboard\ArticleController@show')->name('admin.article_show');
+    Route::get('/edit/{id}', 'Dashboard\ArticleController@edit')->name('article.edit');
+    Route::delete('/article/delete/{id}', 'Dashboard\ArticleController@destroy')->name('destroy.article');
+    Route::put('/update-article/{id}', 'Dashboard\ArticleController@update')->name('article.update');
 });
 
 Route::group([] , function(){

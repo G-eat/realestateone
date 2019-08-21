@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dashboard;
 
 use App\AboutUs;
 use App\Article;
@@ -14,22 +14,22 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.home');
+        return view('dashboard.home');
     }
 
 //    public function articles ()
 //    {
-//        return view('admin.articles');
+//        return view('dashboard.articles');
 //    }
 
     public function contactus ()
     {
-        return view('admin.contactus');
+        return view('dashboard.contactus');
     }
 
     public function aboutus ()
     {
         $aboutus = AboutUs::first();
-        return view('admin.aboutus')->with('aboutus',$aboutus);
+        return view('dashboard.aboutus')->with('aboutus',$aboutus);
     }
 }
