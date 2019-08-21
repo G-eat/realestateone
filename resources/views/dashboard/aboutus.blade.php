@@ -1,32 +1,32 @@
 @extends('dashboard-includes.app')
 
-@section('title') RealEstateOne | Admin-AboutUs @endsection
+@section('title') RealEstateOne | Admin-{{ __('navbar.about') }} @endsection
 
 @section('content')
     <div>
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card">
-                    <div class="card-header">About-us</div>
+                    <div class="card-header">{{ __('navbar.about') }}</div>
 
                     <div class="card-body">
 {{--                            <form action="{{ route('aboutus.update') }}" method="post" class="form-group">--}}
 {{--                                @csrf--}}
-                        <label class="font-weight-bold" for="title">Title :</label>
+                        <label class="font-weight-bold" for="title">{{ __('pannel.title') }} :</label>
                         <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Title" value="{{ (old('title')) ? old('title') : $aboutus->title }}">
                         {{--                            @error('title')--}}
                         {{--                            <span class="invalid-feedback" role="alert">--}}
                         {{--                                <strong>{{ $message }}</strong>--}}
                         {{--                            </span>--}}
                         {{--                            @enderror--}}
-                        <label class="font-weight-bold mt-3" for="body">Body :</label>
+                        <label class="font-weight-bold mt-3" for="body">{{ __('pannel.body') }} :</label>
                         <textarea name="body" id="body" rows="6" class="form-control @error('body') is-invalid @enderror" placeholder="Body ...">{{ (old('body')) ? old('body') : $aboutus->body }}</textarea>
                         {{--                            @error('body')--}}
                         {{--                            <span class="invalid-feedback" role="alert">--}}
                         {{--                                <strong>{{ $message }}</strong>--}}
                         {{--                            </span>--}}
                         {{--                            @enderror--}}
-                        <input id="update" type="submit" value="Update" class="btn btn-primary  py-2 px-4 rounded-0 mt-3">
+                        <input id="update" type="submit" value="{{ __('pannel.update') }}" class="btn btn-primary  py-2 px-4 rounded-0 mt-3">
                         {{--                        </form>--}}
                     </div>
                 </div>

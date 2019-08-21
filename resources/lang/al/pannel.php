@@ -6,7 +6,7 @@ return [
     'register' => 'Regjistrohu',
     'logout' => 'Dil',
     'email' => 'Adresa e emailit',
-    'password' => 'fjalkalimi',
+    'password' => 'Fjalkalimi',
     'remember_me' => 'Me mbaj ne mend',
     'forgot' => 'Keni harruar fjalkalimin?',
     'reset_password' => 'Ndryshoni fjalkalimin',
@@ -20,5 +20,7 @@ return [
     'body' => 'Permbajtja',
     'update' => 'Perditso',
     'myarticle' => 'Artikujt e mi',
+    'name' => 'Emri',
+    'confirm_password' => 'Konfirmo Passwordin',
 
 ];

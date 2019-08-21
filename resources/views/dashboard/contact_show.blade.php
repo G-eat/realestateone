@@ -1,6 +1,6 @@
 @extends('dashboard-includes.app')
 
-@section('title') RealEstateOne | Admin-ContactUs @endsection
+@section('title') RealEstateOne | Admin-{{ __('navbar.contact') }} @endsection
 
 @section('content')
     <div>

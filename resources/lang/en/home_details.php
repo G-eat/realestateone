@@ -24,5 +24,14 @@ return [
     'all' => 'All',
     'missing' => 'No apartments for sale or rent.',
     'not_related' => 'There\'s no properties related to this.',
+    'for' => 'For',
+    'available' => 'Available',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'created' => 'Created',
+    'updated' => 'Updated',
+    'back' => 'Back',
+    'edit' => 'Edit',
+    'show' => 'Show',
 
 ];

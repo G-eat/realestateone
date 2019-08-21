@@ -60,7 +60,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}" >
-                        {{ __('Logout') }}
+                        {{ __('pannel.logout') }}
                     </a>
                 </li>
             @endguest
@@ -83,15 +83,15 @@
                         </div>
                     </div>
                     <ul class="list-sidebar bg-defoult">
-                        <li> <a href="{{ route('home') }}" class="collapsed active"> <i class="fa fa-th-large"></i> <span class="nav-label"> Dashboards </span></a></li>
+                        <li> <a href="{{ route('home') }}" class="collapsed active"> <i class="fa fa-th-large"></i> <span class="nav-label"> {{ __('pannel.dashboard') }} </span></a></li>
                         @can('admin')
-                            <li> <a href="{{ route('article.all') }}"><i class="fa fa-eye"></i> <span class="nav-label">ClientSide</span></a> </li>
-                            <li> <a href="{{ route('articles') }}" class="collapsed active"><i class="fa fa-table"></i> <span class="nav-label">Articles</span></a> </li>
-                            <li> <a href="{{ route('admin.contactus') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Contacts</span></a> </li>
-                            <li> <a href="{{ route('admin.aboutus') }}" class="collapsed active"><i class="fa fa-info"></i> <span class="nav-label">AboutUs Content</span></a> </li>
+                            <li> <a href="{{ route('article.all') }}"><i class="fa fa-eye"></i> <span class="nav-label">{{ __('pannel.webpage') }}</span></a> </li>
+                            <li> <a href="{{ route('articles') }}" class="collapsed active"><i class="fa fa-table"></i> <span class="nav-label">{{ __('pannel.articles') }}</span></a> </li>
+                            <li> <a href="{{ route('admin.contactus') }}"><i class="fa fa-envelope"></i> <span class="nav-label">{{ __('navbar.contact') }}</span></a> </li>
+                            <li> <a href="{{ route('admin.aboutus') }}" class="collapsed active"><i class="fa fa-info"></i> <span class="nav-label">{{ __('navbar.about') }} Content</span></a> </li>
                         @else
-                            <li> <a href="{{ route('article.all') }}"><i class="fa fa-eye"></i> <span class="nav-label">AllArticles</span></a> </li>
-                            <li> <a href="{{ route('articles') }}" class="collapsed active"><i class="fa fa-table"></i> <span class="nav-label">MyArticles</span></a> </li>
+                            <li> <a href="{{ route('article.all') }}"><i class="fa fa-eye"></i> <span class="nav-label">{{ __('pannel.webpage') }}</span></a> </li>
+                            <li> <a href="{{ route('articles') }}" class="collapsed active"><i class="fa fa-table"></i> <span class="nav-label">{{ __('pannel.myarticle') }}</span></a> </li>
                         @endcan
                     </ul>
                 </div>

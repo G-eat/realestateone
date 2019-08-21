@@ -7,19 +7,19 @@
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card">
-                    <div class="card-header">Articles</div>
+                    <div class="card-header">{{ __('pannel.articles') }}</div>
                     <div class="container">
-                        <a class="btn btn-primary mt-2 mb-2" style="float: right" href="{{ route('article.create') }}">Create</a>
+                        <a class="btn btn-primary mt-2 mb-2" style="float: right" href="{{ route('article.create') }}">{{ __('pannel.create') }}</a>
                         <div class="card-body">
                             <table class="table table-bordered" id="articles-table">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
                                         <th>Title</th>
-                                        <th>City</th>
-                                        <th>Address</th>
-                                        <th>Type</th>
-                                        <th>Phone Number</th>
+                                        <th>{{ __('home_details.city') }}</th>
+                                        <th>{{ __('home_details.address') }}</th>
+                                        <th>{{ __('home_details.type') }}</th>
+                                        <th>{{ __('home_details.number') }}</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>

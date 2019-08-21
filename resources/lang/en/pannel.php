@@ -20,5 +20,7 @@ return [
     'body' => 'Body',
     'update' => 'Update',
     'myarticle' => 'MyArticle',
+    'name' => 'Name',
+    'confirm_password' => 'Confirm Password',
 
 ];

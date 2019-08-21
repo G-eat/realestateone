@@ -11,7 +11,7 @@
                     <div class="card border-primary rounded-0">
                         <div class="card-header p-0">
                             <div class="bg-info text-white text-center py-2">
-                                <h3>Create Article</h3>
+                                <h3>{{ __('pannel.create') }} Article</h3>
                             </div>
                         </div>
                         <div class="card-body p-3">
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">Body</div>
+                                        <div class="input-group-text text-primary font-weight-bold">{{ __('pannel.body') }}</div>
                                     </div>
                                     <textarea rows="10" name="body" class="form-control @error('body') is-invalid @enderror" placeholder="Body">{{ old('body') ? old('body') : '' }}</textarea>
 
@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">City</div>
+                                        <div class="input-group-text text-primary font-weight-bold">{{ __('pannel.create') }}</div>
                                     </div>
                                     <select name='city' class="form-control" id="exampleFormControlSelect1">
                                         <option value="Gjakove" {{ ( old("city") == 'Gjakove' ? "selected":"") }}>Gjakove</option>
@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">Address</div>
+                                        <div class="input-group-text text-primary font-weight-bold">{{ __('home_details.address') }}</div>
                                     </div>
                                     <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="address" value="{{ old('address') ? old('address') : '' }}">
 
@@ -82,12 +82,12 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">For</div>
+                                        <div class="input-group-text text-primary font-weight-bold">{{ __('home_details.for') }}</div>
                                     </div>
                                     <select name="for" class="form-control" id="exampleFormControlSelect1">
                                         <option value="both" {{ ( old("for") == 'both' ? "selected":"") }}>Both</option>
-                                        <option value="sale" {{ ( old("for") == 'sale' ? "selected":"") }}>Sale</option>
-                                        <option value="rent" {{ ( old("for") == 'rent' ? "selected":"") }}>Rent</option>
+                                        <option value="sale" {{ ( old("for") == 'sale' ? "selected":"") }}>{{ __('home_details.sale') }}</option>
+                                        <option value="rent" {{ ( old("for") == 'rent' ? "selected":"") }}>{{ __('home_details.rent') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">Price</div>
+                                        <div class="input-group-text text-primary font-weight-bold">{{ __('home_details.price') }}</div>
                                     </div>
                                     <input name="price" type="number" class="form-control @error('price') is-invalid @enderror" placeholder="e.g. 200" value="{{ old('price') ? old('price') : '' }}">
                                     <div class="input-group-append">
@@ -113,7 +113,7 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">Type</div>
+                                        <div class="input-group-text text-primary font-weight-bold">{{ __('home_details.type') }}</div>
                                     </div>
                                     <select name="type" class="form-control" id="exampleFormControlSelect1">
                                         <option value="1+1" {{ ( old("type") == '1+1' ? "selected":"") }}>1 + 1</option>
@@ -130,11 +130,11 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">Available</div>
+                                        <div class="input-group-text text-primary font-weight-bold">{{ __('home_details.available') }}</div>
                                     </div>
                                     <select name="available" class="form-control" id="exampleFormControlSelect1">
-                                        <option value="1">Yes</option>
-                                        <option value="0"  {{ ( old("available") == '0' ? "selected":"") }}>No</option>
+                                        <option value="1">{{ __('home_details.yes') }}</option>
+                                        <option value="0"  {{ ( old("available") == '0' ? "selected":"") }}>{{ __('home_details.no') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                             <div class="form-group">
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text text-primary font-weight-bold">Telephone</div>
+                                        <div class="input-group-text text-primary font-weight-bold">{{ __('home_details.number') }}</div>
                                     </div>
                                     <input name="phone_number" type="tel" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" value="{{ old('phone_number') ? old('phone_number') : '' }}">
 
@@ -167,7 +167,7 @@
                             </div>
 
                             <div class="text-center">
-                                <input type="submit" value="Create" class="btn btn-info btn-block rounded-0 py-2">
+                                <input type="submit" value="{{ __('pannel.create') }}" class="btn btn-info btn-block rounded-0 py-2">
                             </div>
                         </div>
 

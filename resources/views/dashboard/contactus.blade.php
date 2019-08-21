@@ -1,6 +1,6 @@
 @extends('dashboard-includes.app')
 
-@section('title') RealEstateOne | Admin-ContactUs @endsection
+@section('title') RealEstateOne | Admin-{{ __('navbar.contact') }} @endsection
 
 @section('content')
     <div>
@@ -14,9 +14,9 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Subject</th>
+                                        <th>{{ __('contact_us.name') }}</th>
+                                        <th>{{ __('contact_us.email') }}</th>
+                                        <th>{{ __('contact_us.subject') }}</th>
                                         <th>Created At</th>
                                         <th>Actions</th>
                                     </tr>

@@ -24,5 +24,14 @@ return [
     'all' => 'Te gjithe',
     'missing' => 'Asnje apartament per shitje ose me qira.',
     'not_related' => 'Asnje apartament i ngjajshem.',
+    'for' => 'Per',
+    'available' => 'Aktiv',
+    'yes' => 'Po',
+    'no' => 'Jo',
+    'created' => 'U krijua',
+    'updated' => 'U perditsua',
+    'back' => 'Mbrapa',
+    'edit' => 'Edito',
+    'show' => 'Shfaqe',
 
 ];
