@@ -1,4 +1,4 @@
-@extends('admin-includes.app')
+@extends('dashboard-includes.app')
 
 @section('content')
 <div class="container">

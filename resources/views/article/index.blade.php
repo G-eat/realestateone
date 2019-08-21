@@ -1,6 +1,6 @@
 @extends('client-includes.app')
 
-@section('title') RealEstateOne | Home @endsection
+@section('title') RealEstateOne | {{ __('navbar.home') }} @endsection
 
 @section('navbar_background')
     <div class="slide-one-item home-slider owl-carousel">
@@ -21,19 +21,19 @@
                         <div class="row align-items-center justify-content-center text-center">
                             <div class="col-md-10">
                                 @if ($article->for == 'sale')
-                                    <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For Sale</span>
+                                    <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">{{ __('home_details.for sale') }}</span>
                                 @elseif ($article->for == 'rent')
-                                    <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">For Rent</span>
+                                    <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">{{ __('home_details.for rent') }}</span>
                                 @else
                                     <div style="display: flex;flex-direction: column;max-width: 200px;align-items: center;margin: 40px auto 0;">
-                                        <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">For Sale</span>
-                                        <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">For Rent</span>
+                                        <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">{{ __('home_details.for sale') }}</span>
+                                        <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">{{ __('home_details.for rent') }}</span>
                                     </div>
                                 @endif
                                 <h1 class="mb-2">{{ $article->city }}</h1>
                                 <small class="text-warning">{{ $article->address }}</small>
                                 <p class="mb-2 mt-2"><strong class="h2 text-success font-weight-bold">{{ $article->price }}$</strong></p>
-                                <p><a href="{{ route('article.show',['id' => $article->id]) }}" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">See Details</a></p>
+                                <p><a href="{{ route('article.show',['id' => $article->id]) }}" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">{{ __('home_details.details') }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -50,10 +50,10 @@
                 <form action="{{ route('article.search') }}" class="form-search col-md-12" style="margin-top: -100px;" method="GET">
                     <div class="row  align-items-end">
                         <div class="col-md-2">
-                            <label for="list-types">Price</label>
+                            <label for="list-types">{{ __('home_details.price') }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">From</span>
+                                    <span class="input-group-text">{{ __('home_details.from') }}</span>
                                 </div>
                                 <input type="text" name='price_from' class="form-control" placeholder="e.g. 200" value="{{ !isset($price_from) ? old('price_from') : $price_from }}">
                             </div>
@@ -61,7 +61,7 @@
                         <div class="col-md-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">To</span>
+                                    <span class="input-group-text">{{ __('home_details.to') }}</span>
                                 </div>
                                 <input type="text" name='price_to' class="form-control" placeholder="e.g. 300" value="{{ !isset($price_to) ? old('price_to') : $price_to }}">
                                 <div class="input-group-append">
@@ -70,21 +70,21 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <label for="offer-types">Offer Type</label>
+                            <label for="offer-types">{{ __('home_details.offer type') }}</label>
                             <div class="select-wrap">
                                 <span class="icon icon-arrow_drop_down"></span>
                                 <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                                    <option value="">All</option>
-                                    <option value="sale" {{ old('offer-types') == 'sale' ? 'selected' : '' }}>For Sale</option>
-                                    <option value="rent" {{ old('offer-types') == 'rent' ? 'selected' : '' }}>For Rent</option>
+                                    <option value="">{{ __('home_details.all') }}</option>
+                                    <option value="sale" {{ old('offer-types') == 'sale' ? 'selected' : '' }}>{{ __('home_details.for sale')}}</option>
+                                    <option value="rent" {{ old('offer-types') == 'rent' ? 'selected' : '' }}>{{ __('home_details.for rent')}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <label for="select-city">City</label>
+                            <label for="select-city">{{ __('home_details.city') }}</label>
                             <div class="select-wrap">
                                 <select name="city" class="form-control d-block rounded-0">
-                                    <option value="">All</option>
+                                    <option value="">{{ __('home_details.all') }}</option>
                                     <option value="gjakove" {{ old('city') == 'gjakove' ? 'selected' : '' }}>Gjakove</option>
                                     <option value="prishtine" {{ old('city') == 'prishtine' ? 'selected' : '' }}>Prishtine</option>
                                     <option value="mitrovice" {{ old('city') == 'mitrovice' ? 'selected' : '' }}>Mitrovice</option>
@@ -96,10 +96,10 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <label for="select-city">Type</label>
+                            <label for="select-city">{{ __('home_details.type') }}</label>
                             <div class="select-wrap">
                                 <select name="type" class="form-control d-block rounded-0">
-                                    <option value="">All</option>
+                                    <option value="">{{ __('home_details.all') }}</option>
                                     <option value="1+1" {{ old('type') == '1+1' ? 'selected' : '' }}>1 + 1</option>
                                     <option value="2+1" {{ old('type') == '2+1' ? 'selected' : '' }}>2 + 1</option>
                                     <option value="3+1" {{ old('type') == '3+1' ? 'selected' : '' }}>3 + 1</option>
@@ -111,7 +111,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="Search">
+                            <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="{{ __('home_details.search')}}">
                         </div>
                     </div>
                 </form>
@@ -128,11 +128,11 @@
                             <div class="ml-auto d-flex align-items-center">
                                 <div>
                                     @if(Route::current()->getName() == 'article.all')
-                                        <a href="{{ route('article.all') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
-                                        <a href="{{ url('/card/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
+                                        <a href="{{ route('article.all') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">{{ __('home_details.latest')}}</a>
+                                        <a href="{{ url('/card/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">{{ __('home_details.most views')}}</a>
                                     @else
-                                        <a href="{{ route('article.all.list') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">Latest</a>
-                                        <a href="{{ url('/list/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">Most Views</a>
+                                        <a href="{{ route('article.all.list') }}" class="view-list px-3 border-right {{ ($sortby != 'most-viewed') ? 'active' : '' }}">{{ __('home_details.latest')}}</a>
+                                        <a href="{{ url('/list/most-viewed') }}" class="view-list px-3 border-right {{ ($sortby == 'most-viewed') ? 'active' : '' }}">{{ __('home_details.most views')}}</a>
                                     @endif
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
         <div class="site-section site-section-sm bg-light">
             <div class="container">
                 @if(count($articles) == 0)
-                    <p class="alert alert-warning">No apartments for sale or rent.</p>
+                    <p class="alert alert-warning">{{ __('home_details.sale') }}</p>
                 @else
                     <div class="row mb-5">
                         @foreach ($articles as $article)
@@ -167,12 +167,12 @@
                                     <a href="{{ route('article.show',['id' => $article->id]) }}" class="property-thumbnail">
                                         <div class="offer-type-wrap">
                                             @if ($article->for == 'sale')
-                                                <span class="offer-type bg-danger">Sale</span>
+                                                <span class="offer-type bg-danger">{{ __('home_details.sale') }}</span>
                                             @elseif ($article->for == 'rent')
-                                                <span class="offer-type bg-success">Rent</span>
+                                                <span class="offer-type bg-success">{{ __('home_details.rent') }}</span>
                                             @else
-                                                <span class="offer-type bg-danger">Sale</span>
-                                                <span class="offer-type bg-success">Rent</span>
+                                                <span class="offer-type bg-danger">{{ __('home_details.sale') }}</span>
+                                                <span class="offer-type bg-success">{{ __('home_details.rent') }}</span>
                                             @endif
                                         </div>
                                         <img src="{{ URL::asset('storage//photos/'.$article->photo[0]->photo) }}" alt="Image" class="img-fluid">
@@ -183,7 +183,7 @@
                                         <strong class="property-price text-primary mb-3 d-block text-success">${{ $article->price }}</strong>
                                         <ul class="property-specs-wrap mb-3 mb-lg-0">
                                             <li>
-                                                <span class="property-specs">Type</span>
+                                                <span class="property-specs">{{ __('home_details.type') }}</span>
                                                 <span class="property-specs-number">{{ $article->type }}</span>
                                             </li>
                                         </ul>

@@ -1,6 +1,6 @@
 @extends('client-includes.app')
 
-@section('title') RealEstateOne | AboutUs @endsection
+@section('title') RealEstateOne | {{ __('navbar.about') }} @endsection
 
 @section('navbar_background')
 {{--    @if(!$article)--}}
@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center text-center">
                     <div class="col-md-10">
-                        <h1 class="mb-2">About RealEstateOne</h1>
+                        <h1 class="mb-2">{{ __('contact_us.about') }} RealEstateOne</h1>
                     </div>
                 </div>
             </div>

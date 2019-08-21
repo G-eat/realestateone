@@ -43,13 +43,21 @@
             <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
             @guest
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'login' ? 'in' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
+                <li class="nav-item mr-2">
+                    <a class="nav-item" href="{{ route('language','al') }}"><img class="mt-3" style="max-height: 24px;max-width: 24px;width: 20px;height: 16px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Flag_of_Albania.svg/2000px-Flag_of_Albania.svg.png" alt=""></a>
+                    <a class="nav-item" href="{{ route('language','en') }}"><img class="mt-3" style="max-height: 24px;max-width: 24px;width: 20px;height: 16px;" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png" alt=""></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'register' ? 'in' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="nav-link {{ Route::currentRouteName() == 'login' ? 'in' : '' }}" href="{{ route('login') }}">{{ __('pannel.login') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'register' ? 'in' : '' }}" href="{{ route('register') }}">{{ __('pannel.register') }}</a>
                 </li>
             @else
+                <li class="nav-item mr-2">
+                    <a class="nav-item" href="{{ route('language','al') }}"><img class="mt-3" style="max-height: 24px;max-width: 24px;width: 20px;height: 16px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Flag_of_Albania.svg/2000px-Flag_of_Albania.svg.png" alt=""></a>
+                    <a class="nav-item" href="{{ route('language','en') }}"><img class="mt-3" style="max-height: 24px;max-width: 24px;width: 20px;height: 16px;" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png" alt=""></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}" >
                         {{ __('Logout') }}
@@ -59,6 +67,7 @@
             </ul>
         </nav>
     </header>
+
 
     <div class="main" style="display: flex">
         @auth

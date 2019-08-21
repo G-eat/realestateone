@@ -1,6 +1,6 @@
 @extends('client-includes.app')
 
-@section('title') RealEstateOne | AboutUs @endsection
+@section('title') RealEstateOne | {{ __('navbar.contact') }} @endsection
 
 @section('navbar_background')
 {{--    @if(!$article)--}}
@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center text-center">
                     <div class="col-md-10">
-                        <h1 class="mb-2">Contact Us</h1>
+                        <h1 class="mb-2">{{ __('navbar.contact') }}</h1>
                     </div>
                 </div>
             </div>
@@ -35,8 +35,8 @@
 {{--                        @csrf--}}
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <label class="font-weight-bold" for="fullname">Full Name</label>
-                                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name" value="{{ old('name') }}">
+                                <label class="font-weight-bold" for="fullname">{{ __('contact_us.name') }}</label>
+                                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="{{ __('contact_us.name') }}" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -46,8 +46,8 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label class="font-weight-bold" for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email Address" value="{{ old('email') }}">
+                                <label class="font-weight-bold" for="email">{{ __('contact_us.email') }}</label>
+                                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('contact_us.email') }}" value="{{ old('email') }}">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -57,8 +57,8 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label class="font-weight-bold" for="email">Subject</label>
-                                <input type="text" id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" placeholder="Enter Subject" value="{{ old('subject') }}">
+                                <label class="font-weight-bold" for="email">{{ __('contact_us.subject') }}</label>
+                                <input type="text" id="subject" name="subject" class="form-control @error('subject') is-invalid @enderror" placeholder="{{ __('contact_us.subject') }}" value="{{ old('subject') }}">
                                 @error('subject')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -68,8 +68,8 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label class="font-weight-bold" for="message">Message</label>
-                                <textarea name="content" id="content"  cols="30" rows="5" class="form-control @error('content') is-invalid @enderror" placeholder="Say hello to us">{{ old('content') }}</textarea>
+                                <label class="font-weight-bold" for="message">{{ __('contact_us.message') }}</label>
+                                <textarea name="content" id="content"  cols="30" rows="5" class="form-control @error('content') is-invalid @enderror" placeholder="{{ __('contact_us.message') }}">{{ old('content') }}</textarea>
                                 @error('content')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <input type="submit" value="Send Message" class="btn btn-primary  py-2 px-4 rounded-0">
+                                <input type="submit" value="{{ __('contact_us.send') }}" class="btn btn-primary  py-2 px-4 rounded-0">
                             </div>
                         </div>
                     </form>

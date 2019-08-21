@@ -3,20 +3,20 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="mb-5">
-                        <h3 class="footer-heading mb-4">About RealEstateOne</h3>
+                        <h3 class="footer-heading mb-4">{{ __('contact_us.about') }} RealEstateOne</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <h3 class="footer-heading mb-4">Navigations</h3>
                     <div>
-                        <a href="{{ route('article.all') }}" class="pl-0 pr-3">Home</a>
-                        <a href="{{ route('aboutus') }}" class="pl-3 pr-3">About</a>
-                        <a href="{{ route('contactus') }}" class="pl-3 pr-3">Contact</a>
+                        <a href="{{ route('article.all') }}" class="pl-0 pr-3">{{ __('navbar.home') }}</a>
+                        <a href="{{ route('aboutus') }}" class="pl-3 pr-3">{{ __('navbar.about') }}</a>
+                        <a href="{{ route('contactus') }}" class="pl-3 pr-3">{{ __('navbar.contact') }}</a>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h3 class="footer-heading mb-4">Follow Us</h3>
+                    <h3 class="footer-heading mb-4">Follow</h3>
                     <div>
                         <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
                         <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>

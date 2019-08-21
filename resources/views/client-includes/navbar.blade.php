@@ -19,13 +19,18 @@
                         <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
                         <ul class="site-menu js-clone-nav d-none d-lg-block">
                             <li class="{{ (Route::current()->getName() == 'article.all') ? 'active' : '' }}">
-                                <a href="{{ route('article.all') }}">Home</a>
+                                <a href="{{ route('article.all') }}">{{ __('navbar.home') }}</a>
                             </li>
                             <li class="{{ (Route::current()->getName() == 'aboutus') ? 'active' : '' }}">
-                                <a href="{{ route('aboutus') }}">About</a>
+                                <a href="{{ route('aboutus') }}">{{ __('navbar.about') }}</a>
                             </li>
                             <li class="{{ (Route::current()->getName() == 'contactus') ? 'active' : '' }}">
-                                <a href="{{ route('contactus') }}">Contact</a>
+                                <a href="{{ route('contactus') }}">{{ __('navbar.contact') }}</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('language','al') }}"><img  style="max-height: 24px;max-width: 24px;width: 20px;height: 16px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Flag_of_Albania.svg/2000px-Flag_of_Albania.svg.png" alt=""></a>
+                                <a href="{{ route('language','en') }}"><img  style="max-height: 24px;max-width: 24px;width: 20px;height: 16px;" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png" alt=""></a>
                             </li>
                         </ul>
                     </nav>

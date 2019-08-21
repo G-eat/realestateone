@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
@@ -75,4 +76,9 @@ Route::group([] , function(){
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 });
+
+Route::get('/language/{locale?}', function ($locale){
+    session()->put('locale',$locale);
+    return redirect()->back();
+})->name('language');
 
