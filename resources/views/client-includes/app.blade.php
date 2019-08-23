@@ -17,7 +17,7 @@
                             @endcan
                         </a>
                         <a href="{{ route('logout') }}" class="text-white">
-                            {{ __('Logout') }}
+                            {{ __('pannel.logout') }}
                         </a>
                     </div>
                 </nav>

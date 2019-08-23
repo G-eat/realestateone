@@ -210,30 +210,10 @@ class ArticleController extends Controller
         if (Gate::allows('admin')) {
             $article = Article::findorFail($id);
         } elseif (Gate::allows('user')) {
-            $article = Article::where('user_id','=',Auth::user()->id)->findorFail($id);
+            $article = Article::where('user_id',Auth::user()->id)->findorFail($id);
         }
 
         return $article;
     }
 
-//    public function articlesdatatable()
-//    {
-//        if (Gate::allows('admin')) {
-//            $articles = Article::select(['id','title','city','address','type','phonenumber']);
-//        }
-//
-//        if (Gate::allows('user')) {
-//            $user = Auth::user();
-//            $articles = Article::where('user_id','=',$user->id)->select(['id','title','city','address','type','phonenumber']);
-//        }
-//
-//        return Datatables::of($articles)
-//            ->editColumn('action', function($article) {
-//                return
-//                    '<a href="' . route('admin.article_show', $article->id) . '" target="_blank"><i class="fa fa-eye text-success" aria-hidden="true"></i></a>
-//                 <a href="' . route('article.edit', $article->id) . '"><i class="fa fa-pencil text-primary" aria-hidden="true"></i></a>
-//                 <a role="button" class="deleteButton" data-id="'. $article->id .'"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
-//            })
-//            ->make();
-//    }
 }
