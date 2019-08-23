@@ -40,7 +40,7 @@ class SendResetLinkEmail extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/api/auth/password/reset/'.$notifiable->activation_token);
+        $url = url('/password/reset/'.$notifiable->reset_password_token);
 
         return (new MailMessage)
             ->subject('Reset your password for you account')

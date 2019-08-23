@@ -81,11 +81,10 @@ class UserController extends Controller
             ], 404);
         }
 
-        $user->password = str_random(20);
-        // yes this is bcrypted in User model ;)
-        // do a save from $request->all() etc
-
         $reset_token = strtolower(str_random(64));
+
+        $user['reset_password_token'] =  $reset_token;
+        $user->save();
 
          DB::table('password_resets')->insert([
             'email' => $user->email,
@@ -93,12 +92,42 @@ class UserController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        if ($user) {
-            $user->notify(new SendResetLinkEmail($reset_token));
-        }
+        $user->notify(new SendResetLinkEmail($user));
 
         return response()->json([
-            'message' => 'We have sent your password reset link!'
+            'message' => 'We have sent your password reset link!',
+            'token' => $reset_token
         ]);
+    }
+
+    public function reset(ApiResetPassRequest $request, $token)
+    {
+        $passwordReset = DB::table('password_resets')->where([
+            'token' => $token,
+        ])->get();
+
+        if (!$passwordReset) {
+            return response()->json([
+                'message' => 'Email or password reset token provided is invalid.'
+            ], 404);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'We cant find a user with that e-mail address.'
+            ], 404);
+        }
+
+        $user['password'] = bcrypt($request->password);
+        $user['reset_password_token'] = '';
+        $user->save();
+
+        DB::table('password_resets')->where([
+            'token' => $token,
+        ])->delete();
+
+        return response()->json($user);
     }
 }

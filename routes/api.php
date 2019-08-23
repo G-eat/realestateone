@@ -21,11 +21,23 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('login' , 'Api\UserController@login');
     Route::post('register' , 'Api\UserController@register');
     Route::post('password/email', 'Api\UserController@sendResetLinkEmail');
+    Route::post('password/reset/{token}', 'Api\UserController@reset');
 
     Route::group([
         'middleware' => 'auth:api'
     ], function() {
         Route::get('logout', 'Api\UserController@logout');
     });
-
 });
+
+Route::group([], function () {
+    Route::group(['prefix' => 'article','middleware' => 'auth:api'], function() {
+        Route::get('/{sortBy?}', 'Api\ArticleController@index')->where(['sortBy' => 'most-viewed']);
+        Route::get('/property/{id}', 'Api\ArticleController@show');
+        Route::get('/search', 'Api\ArticleController@search');
+    });
+
+    Route::get('/aboutus', 'Api\AboutUsController@index');
+    Route::post('/contactus', 'Api\ContactUsController@sendmessage');
+});
+

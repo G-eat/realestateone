@@ -135,7 +135,7 @@
         <div class="site-section site-section-sm bg-light">
             <div class="container">
                 @if(count($articles) == 0)
-                    <p class="alert alert-warning">{{ __('home_details.sale') }}</p>
+                    <p class="alert alert-warning">{{ __('home_details.missing') }}</p>
                 @else
                     <div class="row mb-5">
                         @foreach ($articles as $article)
