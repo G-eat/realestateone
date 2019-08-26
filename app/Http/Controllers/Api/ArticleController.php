@@ -3,33 +3,88 @@
 namespace App\Http\Controllers\Api;
 
 use App\Article;
+use App\Http\Requests\ApiSearchRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/article/{sortBy}",
+     *     operationId="Articles",
+     *     summary="Articles",
+     *     tags={"Articles"},
+     *     @OA\Parameter(
+     *          name="sortBy",
+     *          in="path",
+     *          required=true,
+     *          example="latest",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
     public function index($sortBy = 'latest')
     {
-        if ($sortBy == 'most-viewed') {
-            $articles = Article::with(['photo' => function($query) {
+
+        if($sortBy == 'latest' || $sortBy == 'most-viewed' || $sortBy == '')
+        {
+            if ($sortBy == 'most-viewed') {
+                $articles = Article::with(['photo' => function($query) {
+                    $query->where('is_thumbnail', '=', 1);
+                }])->orderBy('views', 'desc')->paginate(9);
+            } else {
+                $articles = Article::with(['photo' => function($query) {
+                    $query->where('is_thumbnail', '=', 1);
+                }])->orderBy('created_at', 'desc')->paginate(9);
+            }
+
+            $randomArticles = Article::with(['photo' => function($query) {
                 $query->where('is_thumbnail', '=', 1);
-            }])->orderBy('views', 'desc')->paginate(9);
-        } else {
-            $articles = Article::with(['photo' => function($query) {
-                $query->where('is_thumbnail', '=', 1);
-            }])->orderBy('created_at', 'desc')->paginate(9);
+            }])->inRandomOrder()->take(5)->get();
+
+            return response()->json([
+                'Articles' => $articles,
+                'Random Article : ' => $randomArticles
+            ]);
         }
 
-        $randomArticles = Article::with(['photo' => function($query) {
-            $query->where('is_thumbnail', '=', 1);
-        }])->inRandomOrder()->take(5)->get();
-
         return response()->json([
-            'Articles' => $articles,
-            'Random Article : ' => $randomArticles
+            'Message' => 'Error in url'
         ]);
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/article/property/{id}",
+     *     operationId="Property",
+     *     summary="Show one article",
+     *     tags={"Property"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
     public function show($id) {
         $article = Article::find($id);
 
@@ -78,6 +133,61 @@ class ArticleController extends Controller
         ]);
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/search",
+     *     operationId="Search",
+     *     summary="Search",
+     *     tags={"Search"},
+     *     @OA\Parameter(
+     *          name="price_from",
+     *          in="query",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="price_to",
+     *          in="query",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="offer_types",
+     *          in="query",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="city",
+     *          in="query",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="type",
+     *          in="query",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
     public function search(ApiSearchRequest $request)
     {
         $price_from    = $request['price_from'];

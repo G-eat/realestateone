@@ -31,13 +31,23 @@ Route::group(['prefix' => 'auth'], function() {
 });
 
 Route::group([], function () {
-    Route::group(['prefix' => 'article','middleware' => 'auth:api'], function() {
-        Route::get('/{sortBy?}', 'Api\ArticleController@index')->where(['sortBy' => 'most-viewed']);
+    Route::group(['prefix' => 'article'], function() {
+        Route::get('/{sortBy?}', 'Api\ArticleController@index');
         Route::get('/property/{id}', 'Api\ArticleController@show');
-        Route::get('/search', 'Api\ArticleController@search');
     });
+
+    Route::get('/search', 'Api\ArticleController@search');
 
     Route::get('/aboutus', 'Api\AboutUsController@index');
     Route::post('/contactus', 'Api\ContactUsController@sendmessage');
 });
 
+Route::group([
+    'middleware' => ['auth:api'],
+], function () {
+    Route::get('contact-us', 'Api\ContactUsController@contactus');
+    Route::get('about-us', 'Api\AboutUsController@aboutus');
+    Route::delete('/contact/delete/{id}', 'Api\ContactUsController@destroy');
+    Route::get('/contact/{id}', 'Api\ContactUsController@show');
+    Route::put('/update/about-us', 'Api\AboutUsController@update');
+});

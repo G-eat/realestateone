@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\ApiLoginRequest;
 use App\Http\Requests\ApiRegisterRequest;
+use App\Http\Requests\ApiResetPassRequest;
 use App\Http\Requests\ApiSendResetPasswordLinkEmailRequest;
 use App\Notifications\SendResetLinkEmail;
 use App\User;
@@ -14,8 +15,74 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
+/**
+  @OA\Info(
+      description="",
+      version="1.0.0",
+      title="RealEstate API",
+ )
+ */
+
+/**
+  @OA\SecurityScheme(
+      securityScheme="bearerAuth",
+          type="http",
+          scheme="bearer",
+          bearerFormat="JWT"
+      ),
+ */
 class UserController extends Controller
 {
+    /**
+        @OA\Post(
+            path="/api/auth/login",
+            tags={"Login User"},
+            summary="Login",
+            operationId="login",
+
+            @OA\Parameter(
+                name="email",
+                in="query",
+                required=true,
+                @OA\Schema(
+                    type="string"
+                )
+            ),
+            @OA\Parameter(
+                name="password",
+                in="query",
+                required=true,
+                @OA\Schema(
+                    type="string"
+                )
+            ),
+            @OA\Response(
+                response=200,
+                description="Success",
+                @OA\MediaType(
+                    mediaType="application/json",
+                )
+            ),
+            @OA\Response(
+                response=401,
+                description="Unauthorized"
+            ),
+            @OA\Response(
+                response=400,
+                description="Invalid request"
+            ),
+            @OA\Response(
+                 response=404,
+                description="not found"
+            ),
+        )
+    */
+
+    /*
+        login API
+        @return \Illuminate\Http\Response
+    */
     public function login(ApiLoginRequest $request)
     {
         $credentials = request(['email', 'password']);
@@ -48,6 +115,65 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+        @OA\Post(
+            path="/api/auth/register",
+            tags={"Register User"},
+            summary="Register",
+            operationId="Register",
+
+
+            @OA\Parameter(
+                name="name",
+                in="query",
+                required=true,
+                @OA\Schema(
+                    type="string"
+                )
+            ),
+            @OA\Parameter(
+                name="email",
+                in="query",
+                required=true,
+                @OA\Schema(
+                    type="string"
+                )
+            ),
+            @OA\Parameter(
+                name="password",
+                in="query",
+                required=true,
+                @OA\Schema(
+                    type="string"
+                )
+            ),
+            @OA\Response(
+                response=200,
+                description="Success",
+                @OA\MediaType(
+                    mediaType="application/json",
+                )
+            ),
+            @OA\Response(
+            response=401,
+            description="Unauthorized"
+            ),
+            @OA\Response(
+            response=400,
+            description="Invalid request"
+            ),
+            @OA\Response(
+            response=404,
+            description="not found"
+            ),
+        )
+    */
+
+    /*
+      register API
+
+      @return \Illuminate\Http\Response
+    */
     public function register ( ApiRegisterRequest $request)
     {
         $user = new User([
@@ -62,6 +188,23 @@ class UserController extends Controller
         ],201);
     }
 
+
+    /**
+     * @OA\Get(
+     *     path="/api/auth/logout",
+     *     operationId="logout",
+     *     summary="Logout",
+     *     tags={"Logout User"},
+     *     description="Logs user out(revokes token)",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
@@ -71,6 +214,32 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+     * @OA\Post(
+     *     path="/api/auth/password/email",
+     *     operationId="Send Reset Password",
+     *     summary="Send Reset Password",
+     *     tags={"Send Reset Password"},
+     *     description="Send Reset password",
+     *     @OA\Parameter(
+     *          name="email",
+     *          in="query",
+     *          required=true,
+     *          description="",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *     @OA\JsonContent(),
+     *     )
+     * )
+     * @param ApiSendResetPasswordLinkEmailRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function sendResetLinkEmail(ApiSendResetPasswordLinkEmailRequest $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -100,6 +269,63 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+     * @OA\Post(
+     *     path="/api/auth/password/reset/{token}",
+     *     operationId="Reset Password",
+     *     tags={"Reset Password"},
+     *     description="Reset Password with token",
+     *     @OA\Parameter(
+     *          name="token",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="email",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="email",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="password_confirmation",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *     @OA\JsonContent(),
+     *     )
+     * )
+     * @param ApiResetPassRequest $request
+     * @param $token
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function reset(ApiResetPassRequest $request, $token)
     {
         $passwordReset = DB::table('password_resets')->where([
