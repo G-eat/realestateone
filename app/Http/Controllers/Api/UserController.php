@@ -147,6 +147,14 @@ class UserController extends Controller
                     type="string"
                 )
             ),
+            @OA\Parameter(
+                name="password_confirmation",
+                in="query",
+                required=true,
+                @OA\Schema(
+                    type="string"
+                )
+            ),
             @OA\Response(
                 response=200,
                 description="Success",
@@ -328,9 +336,8 @@ class UserController extends Controller
      */
     public function reset(ApiResetPassRequest $request, $token)
     {
-        $passwordReset = DB::table('password_resets')->where([
-            'token' => $token,
-        ])->get();
+        $passwordReset = DB::table('users')->where('reset_password_token', $token)->count();
+
 
         if (!$passwordReset) {
             return response()->json([

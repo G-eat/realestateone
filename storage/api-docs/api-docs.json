@@ -54,9 +54,9 @@
         "/api/update/about-us": {
             "put": {
                 "tags": [
-                    "Update Aboutus"
+                    "Admin Update Aboutus"
                 ],
-                "summary": "Update Aboutus",
+                "summary": "Admin Update Aboutus",
                 "description": "Update Aboutus",
                 "operationId": "Update Aboutus",
                 "parameters": [
@@ -214,6 +214,214 @@
                 }
             }
         },
+        "/api/articles": {
+            "get": {
+                "tags": [
+                    "Admin/User Articles"
+                ],
+                "summary": "Articles",
+                "operationId": "Articles",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/create-article": {
+            "post": {
+                "tags": [
+                    "Create Article"
+                ],
+                "summary": "Create Article",
+                "operationId": "Create Article",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "body",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "for",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "available",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "filenames[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/property/{id}": {
+            "get": {
+                "tags": [
+                    "ArticleInfo"
+                ],
+                "summary": "ArticleInfo",
+                "operationId": "ArticleInfo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/article/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "ArticleDelete"
+                ],
+                "summary": "ArticleDelete",
+                "operationId": "ArticleDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/contactus": {
             "post": {
                 "tags": [
@@ -300,11 +508,47 @@
         "/api/contact/delete/{id}": {
             "delete": {
                 "tags": [
-                    "Delete Contact"
+                    "Admin Delete Contact"
                 ],
-                "summary": "Delete Contact",
+                "summary": "Admin Delete Contact",
                 "description": "Delete Contact",
                 "operationId": "Delete Contact",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/contact/{id}": {
+            "get": {
+                "tags": [
+                    "Admin Show Contact"
+                ],
+                "summary": "Admin Show Contact",
+                "description": "Show Contact",
+                "operationId": "Show Contact",
                 "parameters": [
                     {
                         "name": "id",
@@ -403,6 +647,14 @@
                     },
                     {
                         "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
                         "in": "query",
                         "required": true,
                         "schema": {

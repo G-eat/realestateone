@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+
+//authentication
 Route::group(['prefix' => 'auth'], function() {
     Route::post('login' , 'Api\UserController@login');
     Route::post('register' , 'Api\UserController@register');
@@ -30,6 +32,8 @@ Route::group(['prefix' => 'auth'], function() {
     });
 });
 
+
+//clientside
 Route::group([], function () {
     Route::group(['prefix' => 'article'], function() {
         Route::get('/{sortBy?}', 'Api\ArticleController@index');
@@ -42,6 +46,8 @@ Route::group([], function () {
     Route::post('/contactus', 'Api\ContactUsController@sendmessage');
 });
 
+
+//admin dashboard
 Route::group([
     'middleware' => ['auth:api'],
 ], function () {
@@ -50,4 +56,15 @@ Route::group([
     Route::delete('/contact/delete/{id}', 'Api\ContactUsController@destroy');
     Route::get('/contact/{id}', 'Api\ContactUsController@show');
     Route::put('/update/about-us', 'Api\AboutUsController@update');
+});
+
+
+//dashboard
+Route::group(['middleware' => ['auth:api']] , function(){
+    Route::get('articles', 'Api\ArticleController@articles');
+    Route::post('/create-article', 'Api\ArticleController@store');
+
+    Route::get('/property/{id}', 'Api\ArticleController@showarticlesinfo');
+    Route::delete('/article/delete/{id}', 'Api\ArticleController@destroy');
+    Route::put('/update-article/{id}', 'Api\ArticleController@update');
 });

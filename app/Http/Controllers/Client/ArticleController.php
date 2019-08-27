@@ -18,18 +18,21 @@ class ArticleController extends Controller
     {
         if ($sortBy == 'most-viewed') {
             $articles = Article::with(['photo' => function($query) {
-                $query->where('is_thumbnail', '=', 1);
+                $query->where('is_thumbnail', 1);
             }])->orderBy('views', 'desc')->paginate(9);
         } else {
             $articles = Article::with(['photo' => function($query) {
-                $query->where('is_thumbnail', '=', 1);
+                $query->where('is_thumbnail', 1);
             }])->orderBy('created_at', 'desc')->paginate(9);
         }
 
 
         $randomArticles = Article::with(['photo' => function($query) {
-            $query->where('is_thumbnail', '=', 1);
+            $query->where('is_thumbnail', 1);
         }])->inRandomOrder()->take(5)->get();
+
+//        dd($articles);
+//        dd($randomArticles);
 
         return view('article.index')
                                         ->with('sortby', $sortBy)

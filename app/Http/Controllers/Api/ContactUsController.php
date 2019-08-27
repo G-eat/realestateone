@@ -117,8 +117,8 @@ class ContactUsController extends Controller
      * @OA\Delete(
      *     path="/api/contact/delete/{id}",
      *     operationId="Delete Contact",
-     *     summary="Delete Contact",
-     *     tags={"Delete Contact"},
+     *     summary="Admin Delete Contact",
+     *     tags={"Admin Delete Contact"},
      *     description="Delete Contact",
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
@@ -153,6 +153,31 @@ class ContactUsController extends Controller
         }
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/contact/{id}",
+     *     operationId="Show Contact",
+     *     summary="Admin Show Contact",
+     *     tags={"Admin Show Contact"},
+     *     description="Show Contact",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
     public function show ($id)
     {
         if (Gate::allows('admin')) {

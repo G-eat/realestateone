@@ -4,8 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Article;
 use App\Http\Requests\ApiSearchRequest;
+use App\Http\Requests\ApiCreateArticleRequest;
+use App\Http\Requests\ApiUpdateArticleRequest;
+use App\Photo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -236,5 +242,355 @@ class ArticleController extends Controller
            'RandomArticles' => $randomArticles
         ]);
 
+    }
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/articles",
+     *     operationId="Articles",
+     *     summary="Articles",
+     *     tags={"Admin/User Articles"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
+    public function articles()
+    {
+        if (Gate::allows('admin')) {
+            $articles = Article::select(['id','title','city','address','type','phonenumber'])->get();
+            return response()->json([
+                "Articles" => $articles
+            ]);
+        } elseif (Gate::allows('user')) {
+            $user = Auth::user();
+            $articles = Article::where('user_id',$user->id)->select(['id','title','city','address','type','phonenumber'])->get();
+            return response()->json([
+                "Articles" => $articles
+            ]);
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/create-article",
+     *     operationId="Create Article",
+     *     summary="Create Article",
+     *     tags={"Create Article"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *          name="title",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="body",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="city",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="address",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="for",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="price",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="type",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="available",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="phone_number",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *   @OA\RequestBody(
+     *       @OA\MediaType(
+     *           mediaType="multipart/form-data",
+     *           @OA\Schema(
+     *               @OA\Property(
+     *                  property="filenames[]",
+     *                  type="array",
+     *                  @OA\Items(
+     *                       type="string",
+     *                       format="binary",
+     *                  ),
+     *               ),
+     *           ),
+     *       )
+     *   ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
+    public function store (ApiCreateArticleRequest $request)
+    {
+
+//        return response()->json([
+//           "a"=> $request['filenames']
+//        ]);
+        foreach($request['filenames'] as $file)
+        {
+            $name=time() . '-' . $file;
+//            $file->storeAs('public/photos' , $name);
+            $data[] = $name;
+        }
+
+        $article = Article::create([
+            'user_id'       => \Illuminate\Support\Facades\Auth::user()->id,
+            'title'         => $request['title'],
+            'body'          => $request['body'],
+            'city'          => $request['city'],
+            'address'       => $request['address'],
+            'for'           => $request['for'],
+            'price'         => $request['price'],
+            'type'          => $request['type'],
+            'available'     => $request['available'],
+            'phonenumber'   => $request['phone_number'],
+        ]);
+
+        $first_photo = $data[0];
+
+
+        foreach ($data as $photo_name) {
+            $photo = new Photo();
+            $photo->article_id = $article->id;
+            $photo->photo = $photo_name;
+            if ($first_photo === $photo_name) {
+                $photo->is_thumbnail = 1;
+            } else {
+                $photo->is_thumbnail = 0;
+            }
+            $photo->save();
+        }
+
+
+        return response()->json([
+            'Message' => 'You created new article!'
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/property/{id}",
+     *     operationId="ArticleInfo",
+     *     summary="ArticleInfo",
+     *     tags={"ArticleInfo"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
+    public function showarticlesinfo ($id) {
+
+        if (Gate::allows('admin')) {
+            $article = Article::findorFail($id);
+        } elseif (Gate::allows('user')) {
+            $article = Article::where('user_id',Auth::user()->id)->find($id);
+        }
+
+        return response()->json([
+            'Article'=> $article
+        ]);
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/api/article/delete/{id}",
+     *     operationId="ArticleDelete",
+     *     summary="ArticleDelete",
+     *     tags={"ArticleDelete"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
+    public function destroy ($id)
+    {
+        if (Gate::allows('admin')) {
+            $article = Article::find($id);
+        } elseif (Gate::allows('user')) {
+            $article = Article::where('user_id',Auth::user()->id)->find($id);
+        }
+
+        if(!$article)
+        {
+            return response()->json([
+                "Message"=>"Article not found"
+            ]);
+        }
+
+        $photos = $article->photo;
+
+        foreach ($photos as $photo)
+        {
+            Storage::delete('public/photos/'.$photo->photo);
+        }
+
+        Photo::where('article_id',$article->id)->delete();
+
+        $article->delete();
+
+        return response()->json([
+           "Message"=>"You Deleted an article"
+        ]);
+    }
+
+    public function update(ApiUpdateArticleRequest $request, $id)
+    {
+        if (Gate::allows('admin')) {
+            $article = Article::findorFail($id);
+        } elseif (Gate::allows('user')) {
+            $article = Article::where('user_id','=',Auth::user()->id)->findorFail($id);
+        }
+
+        $changes = $this->change($request->except('filenames'),$article);
+        $allchanges = $this->change([$request['title']],$article);
+
+        if (!$allchanges){
+            return response()->json([
+                'Message' => "You didnt change anything in article!"
+            ]);
+        } else {
+            if ($changes)
+            {
+                Article::where('id', $id)->update($changes);
+            }
+
+            if($request->file('filenames') > 0)
+            {
+                $this->destroyOldPhotos($id);
+
+
+                foreach($request->file('filenames') as $file)
+                {
+                    $photo = new Photo();
+                    $photo->article_id = $article->id;
+
+                    $name=time() . '-' . $file->getClientOriginalName();
+                    $file->storeAs('public/photos' , $name);
+                    $data[] = $name;
+                }
+
+                $first_photo = $data[0];
+
+                foreach ($data as $photo_name) {
+                    $photo = new Photo();
+                    $photo->article_id = $article->id;
+                    $photo->photo = $photo_name;
+                    if ($first_photo === $photo_name) {
+                        $photo->is_thumbnail = 1;
+                    } else {
+                        $photo->is_thumbnail = 0;
+                    }
+                    $photo->save();
+                }
+            }
+
+            return response()->json([
+                'Message' => 'You updated an article!',
+            ]);
+        }
+    }
+    public function change($data,$article)
+    {
+        $article->fill($data);
+        $changes = $article->getDirty();
+        if (count($changes) == 0) {
+            return false;
+        } else {
+            return $changes;
+        }
+    }
+    public function destroyOldPhotos($id)
+    {
+        $article = Article::findOrFail($id);
+        $photos = $article->photo;
+
+        foreach ($photos as $photo)
+        {
+            Storage::delete('public/photos/'.$photo->photo);
+        }
+
+        Photo::where('article_id',$article->id)->delete();
     }
 }

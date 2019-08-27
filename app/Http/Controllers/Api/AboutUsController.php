@@ -71,8 +71,8 @@ class AboutUsController extends Controller
      * @OA\Put(
      *     path="/api/update/about-us",
      *     operationId="Update Aboutus",
-     *     summary="Update Aboutus",
-     *     tags={"Update Aboutus"},
+     *     summary="Admin Update Aboutus",
+     *     tags={"Admin Update Aboutus"},
      *     description="Update Aboutus",
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
