@@ -264,130 +264,27 @@ class ArticleController extends Controller
     {
         if (Gate::allows('admin')) {
             $articles = Article::select(['id','title','city','address','type','phonenumber'])->get();
-            return response()->json([
-                "Articles" => $articles
-            ]);
         } elseif (Gate::allows('user')) {
             $user = Auth::user();
             $articles = Article::where('user_id',$user->id)->select(['id','title','city','address','type','phonenumber'])->get();
-            return response()->json([
-                "Articles" => $articles
-            ]);
         }
+
+        return response()->json([
+            "Articles" => $articles
+        ]);
     }
 
-    /**
-     * @OA\Post(
-     *     path="/api/create-article",
-     *     operationId="Create Article",
-     *     summary="Create Article",
-     *     tags={"Create Article"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\Parameter(
-     *          name="title",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *     @OA\Parameter(
-     *          name="body",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *     @OA\Parameter(
-     *          name="city",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *     @OA\Parameter(
-     *          name="address",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *     @OA\Parameter(
-     *          name="for",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *     @OA\Parameter(
-     *          name="price",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *     @OA\Parameter(
-     *          name="type",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="available",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *     @OA\Parameter(
-     *          name="phone_number",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *   @OA\RequestBody(
-     *       @OA\MediaType(
-     *           mediaType="multipart/form-data",
-     *           @OA\Schema(
-     *               @OA\Property(
-     *                  property="filenames[]",
-     *                  type="array",
-     *                  @OA\Items(
-     *                       type="string",
-     *                       format="binary",
-     *                  ),
-     *               ),
-     *           ),
-     *       )
-     *   ),
-     *     @OA\Response(
-     *          response="200",
-     *          description="success",
-     *          @OA\JsonContent(),
-     *     )
-     * )
-     *
-     */
+
     public function store (ApiCreateArticleRequest $request)
     {
-
 //        return response()->json([
-//           "a"=> $request['filenames']
-//        ]);
+////           "a"=> $request['filenames']
+////        ]);
+////
         foreach($request['filenames'] as $file)
         {
-            $name=time() . '-' . $file;
-//            $file->storeAs('public/photos' , $name);
+            $name=time() . '-' . $file->getClientOriginalName();
+            $file->storeAs('public/photos' , $name);
             $data[] = $name;
         }
 
@@ -430,7 +327,7 @@ class ArticleController extends Controller
      *     path="/api/property/{id}",
      *     operationId="ArticleInfo",
      *     summary="ArticleInfo",
-     *     tags={"ArticleInfo"},
+     *     tags={"Admin/User ArticleInfo"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *          name="id",
