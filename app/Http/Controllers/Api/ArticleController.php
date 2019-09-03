@@ -7,6 +7,7 @@ use App\Http\Requests\ApiSearchRequest;
 use App\Http\Requests\ApiCreateArticleRequest;
 use App\Http\Requests\ApiUpdateArticleRequest;
 use App\Photo;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -274,19 +275,108 @@ class ArticleController extends Controller
         ]);
     }
 
-
+    /**
+     * @OA\Post(
+     *     path="/api/create-article",
+     *     operationId="Create Articles",
+     *     summary="Create Articles",
+     *     tags={"Create Articles"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *          name="title",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="body",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="price",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="city",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="address",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="for",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="price",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="type",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="available",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="phone_number",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
     public function store (ApiCreateArticleRequest $request)
     {
 //        return response()->json([
 ////           "a"=> $request['filenames']
 ////        ]);
 ////
-        foreach($request['filenames'] as $file)
-        {
-            $name=time() . '-' . $file->getClientOriginalName();
-            $file->storeAs('public/photos' , $name);
-            $data[] = $name;
-        }
+
 
         $article = Article::create([
             'user_id'       => \Illuminate\Support\Facades\Auth::user()->id,
@@ -301,20 +391,40 @@ class ArticleController extends Controller
             'phonenumber'   => $request['phone_number'],
         ]);
 
-        $first_photo = $data[0];
+        if($request['filenames']){
+            foreach($request['filenames'] as $file)
+            {
+//                dd(1);
+                $name=time() . '-' . $file->getClientOriginalName();
+                $file->storeAs('public/photos' , $name);
+                $data[] = $name;
+            }
+//            dd($request['filenames']);
+            $first_photo = $data[0];
 
 
-        foreach ($data as $photo_name) {
+            foreach ($data as $photo_name) {
+                $photo = new Photo();
+                $photo->article_id = $article->id;
+                $photo->photo = $photo_name;
+                if ($first_photo === $photo_name) {
+                    $photo->is_thumbnail = 1;
+                } else {
+                    $photo->is_thumbnail = 0;
+                }
+                $photo->save();
+            }
+        } else {
+            $name='default.jpg';
+
+
             $photo = new Photo();
             $photo->article_id = $article->id;
-            $photo->photo = $photo_name;
-            if ($first_photo === $photo_name) {
-                $photo->is_thumbnail = 1;
-            } else {
-                $photo->is_thumbnail = 0;
-            }
+            $photo->photo = $name;
+            $photo->is_thumbnail = 1;
             $photo->save();
         }
+
 
 
         return response()->json([
@@ -412,27 +522,135 @@ class ArticleController extends Controller
         ]);
     }
 
+
+    /**
+     * @OA\Put(
+     *     path="/api/update-article/{id}",
+     *     operationId="Update Articles",
+     *     summary="Update Articles",
+     *     tags={"Update Articles"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="title",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="body",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="price",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="city",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="address",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="for",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="price",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="type",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="available",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="phonenumber",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="success",
+     *          @OA\JsonContent(),
+     *     )
+     * )
+     *
+     */
     public function update(ApiUpdateArticleRequest $request, $id)
     {
         if (Gate::allows('admin')) {
             $article = Article::findorFail($id);
+            if(!$article) {
+                return response()->json([
+                    'Message' => 'No article with this id!',
+                ]);
+            }
         } elseif (Gate::allows('user')) {
             $article = Article::where('user_id','=',Auth::user()->id)->findorFail($id);
+            if(!$article) {
+                return response()->json([
+                    'Message' => 'Your not allowed to update this article!',
+                ]);
+            }
         }
 
-        $changes = $this->change($request->except('filenames'),$article);
-        $allchanges = $this->change([$request['title']],$article);
+        $changes = $this->change($request->except('filenames'), $article);
 
-        if (!$allchanges){
-            return response()->json([
-                'Message' => "You didnt change anything in article!"
-            ]);
-        } else {
-            if ($changes)
-            {
-                Article::where('id', $id)->update($changes);
-            }
+        if($changes) {
+            Article::where('id', $id)->update($changes);
+        }
 
+        if($request['filenames']){
             if($request->file('filenames') > 0)
             {
                 $this->destroyOldPhotos($id);
@@ -462,16 +680,19 @@ class ArticleController extends Controller
                     $photo->save();
                 }
             }
-
-            return response()->json([
-                'Message' => 'You updated an article!',
-            ]);
         }
+
+        return response()->json([
+            'Message' => 'You updated an article!',
+        ]);
+
     }
     public function change($data,$article)
     {
         $article->fill($data);
+//        dd($data);
         $changes = $article->getDirty();
+//        dd($article);
         if (count($changes) == 0) {
             return false;
         } else {

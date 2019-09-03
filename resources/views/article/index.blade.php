@@ -15,6 +15,7 @@
                 </div>
             </div>
         @else
+
             @foreach ($randomarticles as $article)
                 <div class="site-blocks-cover overlay" style="background-image: url({{ URL::asset('storage//photos/'.$article->photo[0]->photo)}}) ;" data-aos="fade" data-stellar-background-ratio="0.5">
                     <div class="container">
@@ -158,7 +159,7 @@
         <div class="site-section site-section-sm bg-light">
             <div class="container">
                 @if(count($articles) == 0)
-                    <p class="alert alert-warning">{{ __('home_details.sale') }}</p>
+                    <p class="alert alert-warning">{{ __('home_details.missing') }}</p>
                 @else
                     <div class="row mb-5">
                         @foreach ($articles as $article)
